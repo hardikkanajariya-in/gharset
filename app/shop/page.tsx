@@ -1,7 +1,9 @@
 import { Container } from "@/components/common/Container";
+import { PageHeader } from "@/components/common/PageHeader";
 import { Pagination } from "@/components/common/Pagination";
-import { SectionHeader } from "@/components/common/SectionHeader";
 import { ProductGrid } from "@/components/product/ProductGrid";
+import { ListingToolbar } from "@/components/product/ListingToolbar";
+import { getCategories } from "@/lib/categories";
 import { getVisibleProducts } from "@/lib/products";
 import { getStoreSettings } from "@/lib/settings";
 import { paginateItems } from "@/lib/pagination";
@@ -18,8 +20,11 @@ export default async function ShopPage({
   const params = await searchParams;
   const page = Number(params?.page || 1);
 
-  const settings = await getStoreSettings();
-  const products = await getVisibleProducts();
+  const [settings, products, categories] = await Promise.all([
+    getStoreSettings(),
+    getVisibleProducts(),
+    getCategories()
+  ]);
 
   const pagination = paginateItems({
     items: products,
@@ -30,10 +35,14 @@ export default async function ShopPage({
   return (
     <section className="compact-section">
       <Container>
-        <SectionHeader
+        <PageHeader
+          eyebrow="Shop"
           title="Shop all organizers"
           description="Browse compact kitchen, bathroom, fridge, wardrobe and daily-use home organizers."
+          aside={<span className="rounded-full bg-primarySoft px-3 py-2 text-xs font-black text-primary">COD order on WhatsApp</span>}
         />
+
+        <ListingToolbar categories={categories} activeHref="/shop" resultCount={products.length} />
 
         <div className="mt-5">
           <ProductGrid

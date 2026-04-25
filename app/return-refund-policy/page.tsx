@@ -7,9 +7,9 @@ export default function PolicyPage() {
   return (
     <section className="compact-section">
       <Container className="max-w-3xl">
-        <div className="card p-5 sm:p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Policy</p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink">Return & Refund Policy</h1>
+        <div className="page-panel p-5 sm:p-6">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Return & Refund Policy</h1>
           <div className="prose-policy mt-4">
             <p>Return and exchange eligibility may depend on product category, supplier policy and delivery condition. We clearly communicate important product details before order confirmation.</p>
             <h2>Important points</h2>

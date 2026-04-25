@@ -36,18 +36,18 @@ export function Footer({
 }) {
   return (
     <>
-      <footer className="border-t border-line bg-white">
+      <footer className="border-t border-primaryDark bg-primaryDark text-white">
         <div className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
           <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.9fr_0.9fr_1fr]">
             <div className="max-w-sm">
               <Link
                 href="/"
-                className="inline-flex text-lg font-semibold tracking-tight text-ink"
+                className="inline-flex text-xl font-black tracking-tight text-white"
               >
                 {BRAND.name}
               </Link>
 
-              <p className="mt-2 text-sm leading-6 text-muted">
+              <p className="mt-2 text-sm leading-6 text-blue-100">
                 {BRAND.tagline} Useful organizers for kitchen, bathroom, fridge
                 and storage spaces.
               </p>
@@ -57,24 +57,24 @@ export function Footer({
                   href={whatsappUrl(suggestionMessage(), whatsappNumber)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring inline-flex h-10 items-center justify-center rounded-xl bg-primary px-4 text-xs font-semibold text-white transition hover:bg-primaryDark"
+                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-white px-4 text-xs font-bold text-primaryDark transition hover:bg-primarySoft"
                 >
                   WhatsApp support
                 </a>
 
                 <Link
                   href="/track-order"
-                  className="focus-ring inline-flex h-10 items-center justify-center rounded-xl border border-line bg-white px-4 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary"
+                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-white/25 bg-white/10 px-4 text-xs font-bold text-white transition hover:bg-white/15"
                 >
                   Track order
                 </Link>
               </div>
 
-              <div className="mt-5 rounded-2xl border border-line bg-cream p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+              <div className="mt-5 rounded-2xl border border-white/15 bg-white/[0.08] p-4">
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-successBg">
                   COD-first ordering
                 </p>
-                <p className="mt-2 text-sm leading-6 text-muted">
+                <p className="mt-2 text-sm leading-6 text-blue-100">
                   Orders are confirmed manually on WhatsApp before processing.
                 </p>
               </div>
@@ -86,11 +86,11 @@ export function Footer({
             <div>
               <FooterGroup title="Company" links={companyLinks} />
 
-              <div className="mt-5 rounded-2xl border border-line bg-mutedSurface p-4 text-xs leading-6 text-muted">
-                <p className="font-medium text-ink">Contact</p>
+              <div className="mt-5 rounded-2xl border border-white/15 bg-white/[0.08] p-4 text-xs leading-6 text-blue-100">
+                <p className="font-bold text-white">Contact</p>
                 <a
                   href={`mailto:${supportEmail}`}
-                  className="mt-1 block break-all hover:text-primary"
+                  className="mt-1 block break-all hover:text-white"
                 >
                   {supportEmail}
                 </a>
@@ -100,8 +100,8 @@ export function Footer({
           </div>
         </div>
 
-        <div className="border-t border-line bg-cream px-4 py-4">
-          <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-2 text-center text-xs leading-6 text-muted sm:flex-row sm:text-left">
+        <div className="border-t border-white/15 bg-[#041833] px-4 py-4">
+          <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-2 text-center text-xs leading-6 text-blue-100 sm:flex-row sm:text-left">
             <p>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
 
             <p>
@@ -110,7 +110,7 @@ export function Footer({
                 href="https://hardikkanajariya.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-ink underline-offset-4 transition hover:text-primary hover:underline"
+                className="font-bold text-white underline-offset-4 transition hover:underline"
               >
                 hardikkanajariya.in
               </a>
@@ -133,13 +133,13 @@ function FooterGroup({
 }) {
   return (
     <nav aria-label={title}>
-      <p className="text-sm font-semibold text-ink">{title}</p>
+      <p className="text-sm font-bold text-white">{title}</p>
 
       <ul className="mt-3 space-y-2">
         {links.map(([label, href]) => (
           <li key={href}>
             <Link
-              className="inline-flex text-sm text-muted transition hover:translate-x-0.5 hover:text-primary"
+              className="inline-flex text-sm font-medium text-blue-100 transition hover:translate-x-0.5 hover:text-white"
               href={href}
             >
               {label}

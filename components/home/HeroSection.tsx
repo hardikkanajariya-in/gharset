@@ -29,25 +29,24 @@ const carouselItems = [
 export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-background">
-      <div className="pointer-events-none absolute -left-24 top-12 h-64 w-64 rounded-full bg-primary/14 blur-3xl" />
-      <div className="pointer-events-none absolute -right-20 top-28 h-72 w-72 rounded-full bg-secondary/14 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-4 left-[45%] hidden h-52 w-52 rounded-full bg-accent/10 blur-3xl lg:block" />
+      <div className="pointer-events-none absolute -left-24 top-12 h-56 w-56 rounded-full bg-primarySoft blur-3xl" />
+      <div className="pointer-events-none absolute -right-20 top-28 h-64 w-64 rounded-full bg-secondarySoft blur-3xl" />
 
       <Container>
-        <div className="grid gap-7 py-7 sm:py-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:py-12">
+        <div className="grid gap-7 py-7 sm:py-9 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-10 lg:py-11">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 rounded-full border border-lineStrong bg-white px-3 py-1.5 shadow-soft">
-              <span className="h-2 w-2 rounded-full bg-accent" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-mutedStrong">
+              <span className="h-2 w-2 rounded-full bg-successText" />
+              <span className="text-[10px] font-black uppercase tracking-[0.16em] text-mutedStrong">
                 COD-first home catalog
               </span>
             </div>
 
-            <h1 className="mt-4 max-w-2xl text-[30px] font-bold leading-[1.05] tracking-[-0.04em] text-ink sm:text-[40px] lg:text-[52px]">
+            <h1 className="mt-4 max-w-2xl text-[34px] font-black leading-[1.05] tracking-tight text-ink sm:text-[42px] lg:text-[54px]">
               Smart organizers for cleaner, faster home setup.
             </h1>
 
-            <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:text-[15px]">
+            <p className="mt-4 max-w-xl text-sm font-medium leading-6 text-muted sm:text-[15px]">
               Shop compact kitchen, bathroom, fridge and wardrobe organizers selected
               for Indian homes, rented rooms and daily-use storage problems.
             </p>
@@ -55,7 +54,7 @@ export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
             <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">
               <Link
                 href="/shop"
-                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white shadow-soft transition hover:bg-primaryDark active:scale-[0.98]"
+                className="focus-ring inline-flex h-12 items-center justify-center rounded-xl bg-primary px-5 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98] sm:h-11"
               >
                 Shop products
               </Link>
@@ -64,7 +63,7 @@ export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
                 href={whatsappUrl(suggestionMessage(), whatsappNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-secondary bg-white px-5 text-sm font-semibold text-secondary transition hover:bg-secondary hover:text-white active:scale-[0.98]"
+                className="focus-ring inline-flex h-12 items-center justify-center rounded-xl border border-lineStrong bg-white px-5 text-sm font-black text-primary transition hover:border-secondary hover:text-secondary active:scale-[0.98] sm:h-11"
               >
                 Get suggestion
               </a>
@@ -86,7 +85,7 @@ export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
           <div className="relative z-10">
             <div className="relative mx-auto max-w-xl">
               <div className="absolute -left-3 top-8 z-20 hidden rotate-[-4deg] rounded-2xl border border-lineStrong bg-white p-3 shadow-lift sm:block">
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-accent">
+                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-secondary">
                   New
                 </p>
                 <p className="mt-1 text-sm font-bold text-ink">50+ useful picks</p>
@@ -101,45 +100,42 @@ export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
                 <p className="mt-0.5 text-xs text-muted">Get product ideas</p>
               </div>
 
-              <div className="rounded-[28px] border border-lineStrong bg-white p-3 shadow-lift sm:p-4">
-                <div className="relative overflow-hidden rounded-[22px] border border-line bg-mutedSurface p-3 sm:p-4">
-                  <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-primary/18 blur-2xl" />
-                  <div className="pointer-events-none absolute -bottom-16 -left-16 h-40 w-40 rounded-full bg-secondary/18 blur-2xl" />
-
+              <div className="rounded-[24px] border border-lineStrong bg-white p-3 shadow-lift sm:p-4">
+                <div className="relative overflow-hidden rounded-[20px] border border-line bg-mutedSurface p-3 sm:p-4">
                   <div className="relative grid gap-3 sm:grid-cols-[1.08fr_0.92fr]">
                     <div className="rounded-2xl border border-lineStrong bg-white p-3 shadow-soft">
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+                          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-muted">
                             Featured setup
                           </p>
-                          <p className="mt-1 text-base font-bold text-ink">
+                          <p className="mt-1 text-base font-black text-ink">
                             Kitchen Reset Kit
                           </p>
                         </div>
-                        <span className="rounded-full bg-accentSoft px-2.5 py-1 text-[10px] font-bold text-accent">
+                        <span className="rounded-full bg-accentSoft px-2.5 py-1 text-[10px] font-black text-accent">
                           Save more
                         </span>
                       </div>
 
                       <div className="mt-4 grid aspect-[4/3] grid-cols-3 gap-2 rounded-2xl border border-line bg-background p-3">
-                        <ProductBlock className="col-span-2 row-span-2" tone="primary" />
-                        <ProductBlock tone="secondary" />
-                        <ProductBlock tone="accent" />
-                        <ProductBlock tone="secondary" />
-                        <ProductBlock tone="primary" />
+                        <ProductBlock className="col-span-2 row-span-2" tone="primary" label="Spice rack" />
+                        <ProductBlock tone="secondary" label="Sink caddy" />
+                        <ProductBlock tone="accent" label="Save" />
+                        <ProductBlock tone="secondary" label="Fridge box" />
+                        <ProductBlock tone="primary" label="Oil set" />
                       </div>
 
                       <div className="mt-3 flex items-end justify-between gap-3">
                         <div>
-                          <p className="text-xs text-muted">Bundle starts from</p>
-                          <p className="text-xl font-bold tracking-tight text-ink">
+                          <p className="text-xs font-medium text-muted">Bundle starts from</p>
+                          <p className="text-xl font-black tracking-tight text-ink">
                             ₹799
                           </p>
                         </div>
                         <Link
                           href="/combo-kits"
-                          className="focus-ring inline-flex h-9 items-center justify-center rounded-xl bg-primary px-3 text-xs font-semibold text-white transition hover:bg-primaryDark"
+                          className="focus-ring inline-flex h-9 items-center justify-center rounded-xl bg-primary px-3 text-xs font-black text-white transition hover:bg-primaryDark"
                         >
                           View kits
                         </Link>
@@ -180,7 +176,7 @@ export function HeroSection({ whatsappNumber }: { whatsappNumber: string }) {
 
 function TrustMini({ label }: { label: string }) {
   return (
-    <div className="rounded-xl border border-lineStrong bg-white px-2.5 py-2 text-center font-semibold leading-snug text-mutedStrong shadow-soft">
+    <div className="rounded-xl border border-lineStrong bg-white px-2.5 py-2 text-center font-black leading-snug text-mutedStrong shadow-soft">
       {label}
     </div>
   );
@@ -188,7 +184,7 @@ function TrustMini({ label }: { label: string }) {
 
 function OfferPill({ label }: { label: string }) {
   return (
-    <span className="rounded-full border border-lineStrong bg-white px-3 py-1.5 text-[11px] font-semibold text-mutedStrong shadow-soft">
+    <span className="rounded-full border border-lineStrong bg-white px-3 py-1.5 text-[11px] font-black text-mutedStrong shadow-soft">
       {label}
     </span>
   );
@@ -196,23 +192,29 @@ function OfferPill({ label }: { label: string }) {
 
 function ProductBlock({
   tone,
+  label,
   className = ""
 }: {
   tone: "primary" | "secondary" | "accent";
+  label: string;
   className?: string;
 }) {
   const toneClass =
     tone === "primary"
-      ? "bg-primarySoft text-primary"
+      ? "bg-primarySoft text-primary border-primary/20"
       : tone === "secondary"
-        ? "bg-secondarySoft text-secondary"
-        : "bg-accentSoft text-accent";
+        ? "bg-secondarySoft text-secondary border-secondary/20"
+        : "bg-accentSoft text-accent border-accent/20";
 
   return (
     <div
       className={`flex items-end rounded-xl border border-line bg-white p-1.5 ${className}`}
     >
-      <div className={`h-full w-full rounded-lg ${toneClass}`} />
+      <div className={`flex h-full w-full items-end rounded-lg border p-2 ${toneClass}`}>
+        <span className="line-clamp-2 text-[10px] font-black leading-tight">
+          {label}
+        </span>
+      </div>
     </div>
   );
 }
@@ -221,7 +223,7 @@ function CarouselPanel() {
   return (
     <div className="overflow-hidden rounded-2xl border border-lineStrong bg-white p-3 shadow-soft">
       <div className="flex items-center justify-between gap-3">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">
+        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-muted">
           Trending now
         </p>
         <div className="flex gap-1">
@@ -235,10 +237,10 @@ function CarouselPanel() {
         {[...carouselItems, ...carouselItems].map((item, index) => (
           <div
             key={`${item.title}-${index}`}
-            className="min-w-[170px] rounded-xl border border-line bg-background p-3"
+              className="min-w-[170px] rounded-xl border border-line bg-background p-3"
           >
             <span
-              className={`rounded-full px-2 py-1 text-[10px] font-bold ${
+              className={`rounded-full px-2 py-1 text-[10px] font-black ${
                 item.tone === "primary"
                   ? "bg-primarySoft text-primary"
                   : item.tone === "secondary"
@@ -248,11 +250,11 @@ function CarouselPanel() {
             >
               {item.tag}
             </span>
-            <p className="mt-2 text-sm font-bold leading-snug text-ink">
+            <p className="mt-2 text-sm font-black leading-snug text-ink">
               {item.title}
             </p>
-            <p className="mt-1 text-xs font-bold text-primary">{item.price}</p>
-            <p className="mt-1 text-xs leading-5 text-muted">{item.text}</p>
+            <p className="mt-1 text-xs font-black text-primary">{item.price}</p>
+            <p className="mt-1 text-xs font-medium leading-5 text-muted">{item.text}</p>
           </div>
         ))}
       </div>
@@ -263,10 +265,10 @@ function CarouselPanel() {
 function StepItem({ number, text }: { number: string; text: string }) {
   return (
     <div className="flex items-center gap-2 rounded-xl border border-line bg-background px-2.5 py-2">
-      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-bold text-white">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-black text-white">
         {number}
       </span>
-      <span className="text-xs font-semibold text-mutedStrong">{text}</span>
+      <span className="text-xs font-bold text-mutedStrong">{text}</span>
     </div>
   );
 }
@@ -274,8 +276,8 @@ function StepItem({ number, text }: { number: string; text: string }) {
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-lineStrong bg-white p-3 shadow-soft">
-      <p className="text-base font-bold text-ink">{value}</p>
-      <p className="mt-0.5 text-[11px] font-medium text-muted">{label}</p>
+      <p className="text-base font-black text-ink">{value}</p>
+      <p className="mt-0.5 text-[11px] font-bold text-muted">{label}</p>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Suspense } from "react";
 import "./globals.css";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
@@ -7,19 +8,20 @@ import { Header } from "@/components/layout/Header";
 import { SiteNavigationLoader } from "@/components/common/SiteNavigationLoader";
 import { getStoreSettings } from "@/lib/settings";
 import { siteMetadata } from "@/lib/seo";
+import { FloatingWhatsAppCTA } from "@/components/layout/FloatingWhatsAppCTA";
 
 export const metadata: Metadata = siteMetadata();
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F8F5EF"
+  themeColor: "#0B3B8F"
 };
 
 export default async function RootLayout({
   children
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const settings = await getStoreSettings();
 
@@ -39,6 +41,7 @@ export default async function RootLayout({
           whatsappNumber={settings.whatsappNumber}
           supportEmail={settings.supportEmail}
         />
+        <FloatingWhatsAppCTA whatsappNumber={settings.whatsappNumber} />
       </body>
     </html>
   );

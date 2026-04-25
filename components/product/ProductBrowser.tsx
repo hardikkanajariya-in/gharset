@@ -28,15 +28,15 @@ export function ProductBrowser({ products, whatsappNumber, filters = defaultFilt
 
   return (
     <div>
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-2 overflow-x-auto pb-1">
+      <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-line bg-white p-3 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+        <div className="chip-scroll flex gap-2 overflow-x-auto pb-1">
           {filters.map((filter) => (
             <button
               key={filter}
               type="button"
               onClick={() => setActive(filter)}
               className={cn(
-                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition",
+                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-black transition",
                 active === filter ? "border-primary bg-primary text-white" : "border-line bg-white text-muted hover:text-ink"
               )}
             >
@@ -44,12 +44,15 @@ export function ProductBrowser({ products, whatsappNumber, filters = defaultFilt
             </button>
           ))}
         </div>
-        <input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search products"
-          className="h-10 rounded-xl border border-line bg-white px-3 text-sm text-ink outline-none focus:border-primary sm:w-64"
-        />
+        <label className="grid gap-1 text-xs font-black uppercase tracking-[0.12em] text-muted sm:block">
+          <span className="sr-only">Search products</span>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search products"
+            className="control-input sm:w-64"
+          />
+        </label>
       </div>
       <ProductGrid products={visibleProducts} whatsappNumber={whatsappNumber} />
     </div>

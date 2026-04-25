@@ -26,7 +26,7 @@ export function Pagination({
   return (
     <nav
       aria-label="Pagination"
-      className="mt-7 flex flex-col items-center justify-between gap-3 rounded-2xl border border-lineStrong bg-white p-3 shadow-soft sm:flex-row"
+      className="mt-7 flex flex-col items-center justify-between gap-3 rounded-2xl border border-line bg-white p-3 shadow-soft sm:flex-row"
     >
       <p className="text-xs font-medium text-muted">
         Page <span className="font-bold text-ink">{currentPage}</span> of{" "}
@@ -37,10 +37,10 @@ export function Pagination({
         <Link
           href={createPageHref(basePath, currentPage - 1)}
           aria-disabled={currentPage <= 1}
-          className={`inline-flex h-9 items-center justify-center rounded-xl border px-3 text-xs font-semibold transition ${
+        className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
             currentPage <= 1
               ? "pointer-events-none border-line bg-mutedSurface text-muted"
-              : "border-lineStrong bg-white text-ink hover:border-primary hover:text-primary"
+              : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
           }`}
         >
           Previous
@@ -51,10 +51,10 @@ export function Pagination({
             key={page}
             href={createPageHref(basePath, page)}
             aria-current={page === currentPage ? "page" : undefined}
-            className={`inline-flex h-9 min-w-9 items-center justify-center rounded-xl border px-3 text-xs font-semibold transition ${
+            className={`focus-ring inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
               page === currentPage
                 ? "border-primary bg-primary text-white"
-                : "border-lineStrong bg-white text-ink hover:border-primary hover:text-primary"
+                : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
             }`}
           >
             {page}
@@ -64,10 +64,10 @@ export function Pagination({
         <Link
           href={createPageHref(basePath, currentPage + 1)}
           aria-disabled={currentPage >= totalPages}
-          className={`inline-flex h-9 items-center justify-center rounded-xl border px-3 text-xs font-semibold transition ${
+          className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
             currentPage >= totalPages
               ? "pointer-events-none border-line bg-mutedSurface text-muted"
-              : "border-lineStrong bg-white text-ink hover:border-primary hover:text-primary"
+              : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
           }`}
         >
           Next

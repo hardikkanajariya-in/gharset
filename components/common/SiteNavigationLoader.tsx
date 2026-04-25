@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 export function SiteNavigationLoader() {
@@ -43,7 +43,7 @@ export function SiteNavigationLoader() {
         ${isVisible ? "opacity-100" : "opacity-0"}
       `}
     >
-      <div className="h-full w-full origin-left animate-site-progress bg-primary" />
+      <div className="h-full w-full origin-left animate-site-progress bg-secondary" />
     </div>
   );
 }

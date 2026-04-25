@@ -35,7 +35,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <section className="compact-section">
+      <section className="compact-section pb-24 sm:pb-11">
         <Container>
           <div className="grid gap-6 lg:grid-cols-[0.92fr_0.78fr] lg:gap-8">
             <ProductGallery product={product} />
@@ -50,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white p-3 shadow-lift sm:hidden">
         <div className="mx-auto flex max-w-[430px] items-center gap-3">
           <div className="flex-1"><PriceBlock price={product.price} mrp={product.mrp} compact /></div>
-          <WhatsAppOrderButton product={product} phone={settings.whatsappNumber} className="h-11 min-w-[156px]" />
+          <WhatsAppOrderButton product={product} phone={settings.whatsappNumber} className="h-12 min-w-[156px]" />
         </div>
       </div>
     </>

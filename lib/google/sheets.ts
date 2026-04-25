@@ -32,24 +32,42 @@ export function rowsToObjects(rows: SheetRows): SheetObject[] {
     });
 }
 
+export function getGoogleAuth() {
+  if (!serviceAccountEmail || !privateKey) {
+    return null;
+  }
+
+  return new google.auth.JWT({
+    email: serviceAccountEmail,
+    key: privateKey,
+    scopes: [
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/drive.readonly"
+    ]
+  });
+}
+
 function getSheetsClient() {
   if (!serviceAccountEmail || !privateKey) {
     throw new Error("Missing Google service account credentials.");
   }
 
-  const auth = new google.auth.JWT({
-    email: serviceAccountEmail,
-    key: privateKey,
-    scopes: ["https://www.googleapis.com/auth/spreadsheets"]
-  });
+  const auth = getGoogleAuth();
+  if (!auth) {
+    throw new Error("Missing Google service account credentials.");
+  }
 
   return google.sheets({ version: "v4", auth });
 }
 
 async function readSheetValuesRaw(
-  spreadsheetId: string,
+  spreadsheetId: string | undefined,
   range: string
 ): Promise<SheetRows> {
+  if (!spreadsheetId) {
+    throw new Error("Missing Google spreadsheet ID.");
+  }
+
   const sheets = getSheetsClient();
 
   const response = await sheets.spreadsheets.values.get({
@@ -60,7 +78,7 @@ async function readSheetValuesRaw(
   return (response.data.values || []) as SheetRows;
 }
 
-export const readSheetValues = unstable_cache(
+const cachedReadSheetValues = unstable_cache(
   async (spreadsheetId: string, range: string) => {
     return readSheetValuesRaw(spreadsheetId, range);
   },
@@ -69,3 +87,32 @@ export const readSheetValues = unstable_cache(
     revalidate: 900
   }
 );
+
+export async function readSheetValues(
+  spreadsheetId: string | undefined,
+  range: string
+) {
+  return cachedReadSheetValues(spreadsheetId || "", range);
+}
+
+export async function appendSheetValues(
+  spreadsheetId: string | undefined,
+  range: string,
+  values: Array<string | number | boolean | null | undefined>
+) {
+  if (!spreadsheetId) {
+    throw new Error("Missing Google spreadsheet ID.");
+  }
+
+  const sheets = getSheetsClient();
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId,
+    range,
+    valueInputOption: "USER_ENTERED",
+    insertDataOption: "INSERT_ROWS",
+    requestBody: {
+      values: [values.map((value) => value ?? "")]
+    }
+  });
+}

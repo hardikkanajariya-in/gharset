@@ -7,9 +7,9 @@ export default function PolicyPage() {
   return (
     <section className="compact-section">
       <Container className="max-w-3xl">
-        <div className="card p-5 sm:p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Policy</p>
-          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-ink">Shipping Policy</h1>
+        <div className="page-panel p-5 sm:p-6">
+          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Shipping Policy</h1>
           <div className="prose-policy mt-4">
             <p>GharSet currently operates as a manual COD catalog. Delivery timelines depend on product availability, supplier dispatch and customer location.</p>
             <h2>Important points</h2>

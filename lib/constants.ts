@@ -8,7 +8,7 @@ export const BRAND = {
 };
 
 export const NAV_ITEMS = [
-  { label: "Shop All", href: "/shop" },
+  { label: "Shop", href: "/shop" },
   { label: "Kitchen", href: "/category/kitchen-organizers" },
   { label: "Bathroom", href: "/category/bathroom-organizers" },
   { label: "Combo Kits", href: "/combo-kits" },
@@ -25,4 +25,4 @@ export const STATUS_STEPS = [
   "Delivered"
 ];
 
-export const DEFAULT_ANNOUNCEMENT = "COD available on selected products · WhatsApp order support";
+export const DEFAULT_ANNOUNCEMENT = "COD available on selected products · WhatsApp order support · New organizer kits added";

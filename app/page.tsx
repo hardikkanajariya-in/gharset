@@ -28,14 +28,14 @@ export default async function HomePage() {
         <Container>
           <div className="flex items-end justify-between gap-4">
             <SectionHeader title="Featured organizers" description="A compact selection of practical daily-use products." />
-            <Link href="/shop" className="hidden text-sm font-semibold text-primary hover:text-primaryDark sm:inline-flex">View all</Link>
+            <Link href="/shop" className="hidden rounded-full border border-lineStrong bg-white px-4 py-2 text-sm font-black text-primary shadow-soft transition hover:border-primary sm:inline-flex">View all</Link>
           </div>
           <div className="mt-5">
             <ProductGrid products={featuredProducts} whatsappNumber={settings.whatsappNumber} />
           </div>
         </Container>
       </section>
-      <section className="compact-section bg-white/45">
+      <section className="compact-section bg-white">
         <Container>
           <SectionHeader title="Combo kits" description="Bundles designed around a specific space so customers buy a complete solution." />
           <div className="mt-5">

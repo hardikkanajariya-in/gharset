@@ -32,9 +32,9 @@ export function BackToTopButton() {
       className={`
         focus-ring fixed bottom-[88px] right-4 z-40
         inline-flex h-10 w-10 items-center justify-center rounded-full
-        border border-line bg-white text-ink shadow-lift
+        border border-lineStrong bg-primary text-white shadow-lift
         transition duration-200
-        hover:border-primary hover:text-primary
+        hover:-translate-y-0.5 hover:bg-primaryDark
         sm:bottom-5 sm:right-5
         ${
           isVisible
