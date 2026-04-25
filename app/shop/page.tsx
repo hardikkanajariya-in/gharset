@@ -1,22 +1,52 @@
 import { Container } from "@/components/common/Container";
+import { Pagination } from "@/components/common/Pagination";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { ProductBrowser } from "@/components/product/ProductBrowser";
+import { ProductGrid } from "@/components/product/ProductGrid";
 import { getVisibleProducts } from "@/lib/products";
 import { getStoreSettings } from "@/lib/settings";
-import { siteMetadata } from "@/lib/seo";
+import { paginateItems } from "@/lib/pagination";
 
 export const revalidate = 900;
-export const metadata = siteMetadata({ title: "Shop Home Organizers — GharSet" });
 
-export default async function ShopPage() {
-  const [products, settings] = await Promise.all([getVisibleProducts(), getStoreSettings()]);
+const PRODUCTS_PER_PAGE = 12;
+
+export default async function ShopPage({
+  searchParams
+}: {
+  searchParams?: Promise<{ page?: string }>;
+}) {
+  const params = await searchParams;
+  const page = Number(params?.page || 1);
+
+  const settings = await getStoreSettings();
+  const products = await getVisibleProducts();
+
+  const pagination = paginateItems({
+    items: products,
+    page,
+    perPage: PRODUCTS_PER_PAGE
+  });
+
   return (
     <section className="compact-section">
       <Container>
-        <SectionHeader title="Shop all organizers" description="Browse the full GharSet catalog. Filter by space, price and daily-use need." />
+        <SectionHeader
+          title="Shop all organizers"
+          description="Browse compact kitchen, bathroom, fridge, wardrobe and daily-use home organizers."
+        />
+
         <div className="mt-5">
-          <ProductBrowser products={products} whatsappNumber={settings.whatsappNumber} />
+          <ProductGrid
+            products={pagination.items}
+            whatsappNumber={settings.whatsappNumber}
+          />
         </div>
+
+        <Pagination
+          basePath="/shop"
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+        />
       </Container>
     </section>
   );

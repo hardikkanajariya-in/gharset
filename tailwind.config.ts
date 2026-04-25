@@ -2,26 +2,40 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./lib/**/*.{js,ts,jsx,tsx,mdx}"
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./lib/**/*.{ts,tsx}"
   ],
   theme: {
     extend: {
       colors: {
-        cream: "#F8F5EF",
-        surface: "#FFFFFF",
-        mutedSurface: "#F1EDE6",
-        primary: "#2F5D50",
-        primaryDark: "#24483E",
-        accent: "#B86B3E",
-        ink: "#1F2933",
-        muted: "#667085",
-        line: "#E4DDD3"
+        background: "var(--background)",
+        cream: "var(--background)",
+        surface: "var(--surface)",
+        mutedSurface: "var(--surface-muted)",
+
+        primary: "var(--primary)",
+        primaryDark: "var(--primary-dark)",
+        primarySoft: "var(--primary-soft)",
+
+        accent: "var(--accent)",
+
+        ink: "var(--ink)",
+        muted: "var(--muted)",
+        mutedStrong: "var(--muted-strong)",
+
+        line: "var(--line)",
+        lineStrong: "var(--line-strong)",
+
+        successBg: "var(--success-bg)",
+        successText: "var(--success-text)",
+
+        warningBg: "var(--warning-bg)",
+        warningText: "var(--warning-text)"
       },
       boxShadow: {
-        soft: "0 8px 24px rgba(31, 41, 51, 0.04)",
-        lift: "0 16px 36px rgba(31, 41, 51, 0.07)"
+        soft: "0 8px 24px rgba(17, 24, 39, 0.04)",
+        lift: "0 14px 32px rgba(17, 24, 39, 0.12)"
       }
     }
   },

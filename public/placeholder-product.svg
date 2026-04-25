@@ -1,8 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800">
-  <rect width="800" height="800" fill="#F1EDE6"/>
-  <rect x="150" y="175" width="500" height="390" rx="30" fill="#FFFFFF" stroke="#E4DDD3" stroke-width="2"/>
-  <circle cx="298" cy="315" r="58" fill="#EAF4EF"/>
-  <path d="M195 520l130-150 100 110 75-82 105 122H195z" fill="#D8E8DF"/>
-  <text x="400" y="625" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#1F2933">GharSet</text>
-  <text x="400" y="662" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#667085">Product image</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">GharSet product image placeholder</title>
+  <desc id="desc">A clean placeholder card for GharSet product images.</desc>
+  <defs>
+    <style>
+      .bg{fill:#F8F5EF}.surface{fill:#FFFFFF}.muted{fill:#F1EDE6}.border{stroke:#E4DDD3}.green{fill:#2F5D50}.greenStroke{stroke:#2F5D50}.accent{fill:#B86B3E}.text{fill:#1F2933}.sub{fill:#667085}.soft{fill:#EAF4EF}.font{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    </style>
+  </defs>
+  <rect width="800" height="800" class="bg"/>
+  <rect x="72" y="72" width="656" height="656" rx="42" class="surface border" stroke-width="2"/>
+
+  <g transform="translate(240 170) scale(0.96)">
+    <path d="M46 132v120q0 16 16 16h206q16 0 16-16V132L178 46q-11-8-22 0Z" fill="none" stroke="#2F5D50" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M232 72V26h38v84" fill="none" stroke="#2F5D50" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M65 167h200M163 90v176" fill="none" stroke="#2F5D50" stroke-width="12" stroke-linecap="round"/>
+    <rect x="83" y="112" width="72" height="52" rx="8" class="accent"/>
+    <rect x="108" y="126" width="22" height="10" rx="5" fill="#fff" opacity=".95"/>
+    <rect x="184" y="135" width="48" height="32" rx="8" class="green"/>
+    <path d="M205 135c-5-22-20-34-36-37 0 18 12 34 36 37Zm3 0c6-22 22-34 38-37 0 18-14 34-38 37Z" class="green"/>
+    <rect x="76" y="200" width="92" height="22" rx="11" class="green"/>
+    <rect x="76" y="233" width="92" height="22" rx="11" class="green" opacity=".82"/>
+    <rect x="186" y="204" width="84" height="52" rx="8" class="accent"/>
+    <rect x="216" y="216" width="24" height="9" rx="4.5" fill="#fff" opacity=".95"/>
+  </g>
+
+  <text x="400" y="532" text-anchor="middle" class="font text" font-size="36" font-weight="750" letter-spacing="-.6">GharSet</text>
+  <text x="400" y="578" text-anchor="middle" class="font sub" font-size="22" font-weight="500">Product image coming soon</text>
+
+  <g transform="translate(246 620)">
+    <rect width="308" height="44" rx="14" class="soft"/>
+    <text x="154" y="29" text-anchor="middle" class="font green" font-size="16" font-weight="700">Smart organizers for every Indian home</text>
+  </g>
 </svg>

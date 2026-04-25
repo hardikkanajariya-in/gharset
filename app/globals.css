@@ -3,15 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --background: #F8F5EF;
+  --background: #F4F6F3;
   --surface: #FFFFFF;
-  --surface-muted: #F1EDE6;
-  --primary: #2F5D50;
-  --primary-dark: #24483E;
-  --accent: #B86B3E;
-  --ink: #1F2933;
-  --muted: #667085;
-  --line: #E4DDD3;
+  --surface-muted: #E9EEE7;
+
+  --primary: #064E3B;
+  --primary-dark: #022C22;
+  --primary-soft: #D1FAE5;
+
+  --accent: #B45309;
+  --accent-soft: #FEF3C7;
+
+  --ink: #0B1220;
+  --muted: #344054;
+  --muted-strong: #1F2937;
+
+  --line: #C7D0C4;
+  --line-strong: #98A69A;
+
+  --success-bg: #D1FAE5;
+  --success-text: #065F46;
+
+  --warning-bg: #FEF3C7;
+  --warning-text: #92400E;
+
+  --danger-bg: #FEE2E2;
+  --danger-text: #991B1B;
 }
 
 * {
@@ -26,7 +43,14 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -44,16 +68,16 @@ select {
 }
 
 ::selection {
-  background: #d8e8df;
+  background: var(--primary-soft);
   color: var(--ink);
 }
 
 .focus-ring {
-  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
 
 .compact-section {
-  @apply py-8 sm:py-10 lg:py-12;
+  @apply py-7 sm:py-9 lg:py-12;
 }
 
 .card {
@@ -74,4 +98,44 @@ select {
 
 .prose-policy ul {
   @apply mt-3 list-disc space-y-2 pl-5;
+}
+
+@keyframes site-progress {
+  0% {
+    transform: translateX(-100%) scaleX(0.35);
+  }
+
+  45% {
+    transform: translateX(-25%) scaleX(0.65);
+  }
+
+  75% {
+    transform: translateX(18%) scaleX(0.85);
+  }
+
+  100% {
+    transform: translateX(100%) scaleX(1);
+  }
+}
+
+.animate-site-progress {
+  animation: site-progress 0.9s ease-in-out infinite;
+}
+
+@keyframes hero-slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-170px * 3 - 36px));
+  }
+}
+
+.animate-hero-slide {
+  animation: hero-slide 14s linear infinite;
+}
+
+.animate-hero-slide:hover {
+  animation-play-state: paused;
 }

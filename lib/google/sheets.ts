@@ -1,74 +1,71 @@
+import "server-only";
+
 import { google } from "googleapis";
+import { unstable_cache } from "next/cache";
 
-type SheetRows = string[][];
+export type SheetRows = string[][];
+export type SheetObject = Record<string, string>;
 
-const SCOPES = [
-  "https://www.googleapis.com/auth/spreadsheets",
-  "https://www.googleapis.com/auth/drive.readonly"
-];
-
-function hasGoogleCredentials() {
-  return Boolean(process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY);
-}
+const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
 
 export function shouldUseSampleData() {
-  return process.env.USE_SAMPLE_DATA !== "false";
+  return process.env.USE_SAMPLE_DATA === "true";
 }
 
-export async function getGoogleAuth() {
-  if (!hasGoogleCredentials()) return null;
+export function rowsToObjects(rows: SheetRows): SheetObject[] {
+  const [headers = [], ...dataRows] = rows;
 
-  const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
+  return dataRows
+    .filter((row) => row.some((cell) => String(cell || "").trim().length > 0))
+    .map((row) => {
+      const object: SheetObject = {};
 
-  return new google.auth.JWT({
-    email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      headers.forEach((header, index) => {
+        const key = String(header || "").trim();
+        if (!key) return;
+
+        object[key] = String(row[index] || "").trim();
+      });
+
+      return object;
+    });
+}
+
+function getSheetsClient() {
+  if (!serviceAccountEmail || !privateKey) {
+    throw new Error("Missing Google service account credentials.");
+  }
+
+  const auth = new google.auth.JWT({
+    email: serviceAccountEmail,
     key: privateKey,
-    scopes: SCOPES
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"]
   });
+
+  return google.sheets({ version: "v4", auth });
 }
 
-export async function readSheetValues(spreadsheetId: string | undefined, range: string | undefined): Promise<SheetRows> {
-  if (!spreadsheetId || !range) return [];
-  const auth = await getGoogleAuth();
-  if (!auth) return [];
+async function readSheetValuesRaw(
+  spreadsheetId: string,
+  range: string
+): Promise<SheetRows> {
+  const sheets = getSheetsClient();
 
-  const sheets = google.sheets({ version: "v4", auth });
-  const response = await sheets.spreadsheets.values.get({ spreadsheetId, range });
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range
+  });
+
   return (response.data.values || []) as SheetRows;
 }
 
-export async function appendSheetValues(
-  spreadsheetId: string | undefined,
-  range: string | undefined,
-  values: Array<string | number | null | undefined>
-) {
-  if (!spreadsheetId || !range) {
-    throw new Error("Missing spreadsheet ID or range.");
+export const readSheetValues = unstable_cache(
+  async (spreadsheetId: string, range: string) => {
+    return readSheetValuesRaw(spreadsheetId, range);
+  },
+  ["google-sheet-values"],
+  {
+    revalidate: 900
   }
-
-  const auth = await getGoogleAuth();
-  if (!auth) throw new Error("Missing Google service account credentials.");
-
-  const sheets = google.sheets({ version: "v4", auth });
-  return sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range,
-    valueInputOption: "USER_ENTERED",
-    requestBody: { values: [values] }
-  });
-}
-
-export function rowsToObjects<T extends Record<string, string>>(rows: SheetRows): T[] {
-  const [headers, ...body] = rows;
-  if (!headers?.length) return [];
-
-  return body
-    .filter((row) => row.some((value) => String(value || "").trim()))
-    .map((row) => {
-      const obj: Record<string, string> = {};
-      headers.forEach((header, index) => {
-        obj[String(header).trim()] = String(row[index] || "").trim();
-      });
-      return obj as T;
-    });
-}
+);

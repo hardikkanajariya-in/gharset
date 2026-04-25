@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { BRAND } from "@/lib/constants";
 import { suggestionMessage, whatsappUrl } from "@/lib/whatsapp";
+import { BackToTopButton } from "@/components/common/BackToTopButton";
 
 const shopLinks = [
   ["Kitchen Organizers", "/category/kitchen-organizers"],
@@ -26,43 +27,126 @@ const companyLinks = [
   ["Terms & Conditions", "/terms-conditions"]
 ];
 
-export function Footer({ whatsappNumber, supportEmail }: { whatsappNumber: string; supportEmail: string }) {
+export function Footer({
+  whatsappNumber,
+  supportEmail
+}: {
+  whatsappNumber: string;
+  supportEmail: string;
+}) {
   return (
-    <footer className="border-t border-line bg-white">
-      <div className="mx-auto grid max-w-[1180px] gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.25fr_1fr_1fr_1fr] lg:px-8">
-        <div>
-          <Link href="/" className="text-lg font-semibold tracking-tight text-ink">{BRAND.name}</Link>
-          <p className="mt-2 max-w-xs text-sm leading-6 text-muted">{BRAND.tagline} Useful organizers for kitchen, bathroom, fridge and storage spaces.</p>
-          <a href={whatsappUrl(suggestionMessage(), whatsappNumber)} className="mt-4 inline-flex rounded-xl bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primaryDark">
-            WhatsApp support
-          </a>
-        </div>
-        <FooterGroup title="Shop" links={shopLinks} />
-        <FooterGroup title="Help" links={helpLinks} />
-        <div>
-          <FooterGroup title="Company" links={companyLinks} />
-          <div className="mt-5 text-xs leading-6 text-muted">
-            <p>{supportEmail}</p>
-            <p>{BRAND.businessCity}</p>
+    <>
+      <footer className="border-t border-line bg-white">
+        <div className="mx-auto max-w-[1180px] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+          <div className="grid gap-7 sm:grid-cols-2 lg:grid-cols-[1.35fr_0.9fr_0.9fr_1fr]">
+            <div className="max-w-sm">
+              <Link
+                href="/"
+                className="inline-flex text-lg font-semibold tracking-tight text-ink"
+              >
+                {BRAND.name}
+              </Link>
+
+              <p className="mt-2 text-sm leading-6 text-muted">
+                {BRAND.tagline} Useful organizers for kitchen, bathroom, fridge
+                and storage spaces.
+              </p>
+
+              <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+                <a
+                  href={whatsappUrl(suggestionMessage(), whatsappNumber)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="focus-ring inline-flex h-10 items-center justify-center rounded-xl bg-primary px-4 text-xs font-semibold text-white transition hover:bg-primaryDark"
+                >
+                  WhatsApp support
+                </a>
+
+                <Link
+                  href="/track-order"
+                  className="focus-ring inline-flex h-10 items-center justify-center rounded-xl border border-line bg-white px-4 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary"
+                >
+                  Track order
+                </Link>
+              </div>
+
+              <div className="mt-5 rounded-2xl border border-line bg-cream p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                  COD-first ordering
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted">
+                  Orders are confirmed manually on WhatsApp before processing.
+                </p>
+              </div>
+            </div>
+
+            <FooterGroup title="Shop" links={shopLinks} />
+            <FooterGroup title="Help" links={helpLinks} />
+
+            <div>
+              <FooterGroup title="Company" links={companyLinks} />
+
+              <div className="mt-5 rounded-2xl border border-line bg-mutedSurface p-4 text-xs leading-6 text-muted">
+                <p className="font-medium text-ink">Contact</p>
+                <a
+                  href={`mailto:${supportEmail}`}
+                  className="mt-1 block break-all hover:text-primary"
+                >
+                  {supportEmail}
+                </a>
+                <p>{BRAND.businessCity}</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="border-t border-line px-4 py-4 text-center text-xs text-muted">© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</div>
-    </footer>
+
+        <div className="border-t border-line bg-cream px-4 py-4">
+          <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-2 text-center text-xs leading-6 text-muted sm:flex-row sm:text-left">
+            <p>© {new Date().getFullYear()} {BRAND.name}. All rights reserved.</p>
+
+            <p>
+              Owned by{" "}
+              <a
+                href="https://hardikkanajariya.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-ink underline-offset-4 transition hover:text-primary hover:underline"
+              >
+                hardikkanajariya.in
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      <BackToTopButton />
+    </>
   );
 }
 
-function FooterGroup({ title, links }: { title: string; links: string[][] }) {
+function FooterGroup({
+  title,
+  links
+}: {
+  title: string;
+  links: string[][];
+}) {
   return (
-    <div>
+    <nav aria-label={title}>
       <p className="text-sm font-semibold text-ink">{title}</p>
+
       <ul className="mt-3 space-y-2">
         {links.map(([label, href]) => (
           <li key={href}>
-            <Link className="text-sm text-muted hover:text-ink" href={href}>{label}</Link>
+            <Link
+              className="inline-flex text-sm text-muted transition hover:translate-x-0.5 hover:text-primary"
+              href={href}
+            >
+              {label}
+            </Link>
           </li>
         ))}
       </ul>
-    </div>
+    </nav>
   );
 }

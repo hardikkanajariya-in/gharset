@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { WhatsAppFloatingButton } from "@/components/common/WhatsAppFloatingButton";
+import { SiteNavigationLoader } from "@/components/common/SiteNavigationLoader";
 import { getStoreSettings } from "@/lib/settings";
 import { siteMetadata } from "@/lib/seo";
 
@@ -15,17 +16,29 @@ export const viewport: Viewport = {
   themeColor: "#F8F5EF"
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children
+}: {
+  children: React.ReactNode;
+}) {
   const settings = await getStoreSettings();
 
   return (
     <html lang="en-IN">
       <body>
+        <Suspense fallback={null}>
+          <SiteNavigationLoader />
+        </Suspense>
+
         <AnnouncementBar text={settings.announcementText} />
         <Header whatsappNumber={settings.whatsappNumber} />
+
         <main>{children}</main>
-        <WhatsAppFloatingButton />
-        <Footer whatsappNumber={settings.whatsappNumber} supportEmail={settings.supportEmail} />
+
+        <Footer
+          whatsappNumber={settings.whatsappNumber}
+          supportEmail={settings.supportEmail}
+        />
       </body>
     </html>
   );
