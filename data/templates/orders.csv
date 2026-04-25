@@ -1,0 +1,2 @@
+order_id,order_date,customer_name,phone,address,product_ids,product_names,order_amount,supplier_cost,profit,payment_method,status,tracking_note,expected_delivery,last_updated,internal_note
+GS-1001,2026-04-26,Rina Ben,9876543210,Sample address,GS-KIT-001,Kitchen Sink Organizer Stand,249,160,89,COD,Customer Confirmed,Your COD order is confirmed and will be placed with supplier.,4–7 working days,2026-04-26,Sample row

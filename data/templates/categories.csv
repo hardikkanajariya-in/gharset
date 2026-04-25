@@ -1,0 +1,3 @@
+category_id,name,slug,description,image_drive_id,visible,sort_order
+CAT-001,Kitchen Organizers,kitchen-organizers,"Space-saving products for sink, shelves, fridge and daily kitchen use.",,yes,1
+CAT-002,Bathroom Organizers,bathroom-organizers,"Simple shelves, holders and hooks for compact bathrooms.",,yes,2
