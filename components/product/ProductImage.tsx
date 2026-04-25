@@ -1,8 +1,16 @@
 import type { Product } from "@/types/product";
-import { getProductImageSrc } from "@/lib/products";
+import { getProductImageSrc } from "@/lib/product-images";
 import { cn } from "@/lib/utils";
 
-export function ProductImage({ product, index = 0, className }: { product: Product; index?: number; className?: string }) {
+export function ProductImage({
+  product,
+  index = 0,
+  className
+}: {
+  product: Product;
+  index?: number;
+  className?: string;
+}) {
   return (
     <img
       src={getProductImageSrc(product, index)}

@@ -44,8 +44,3 @@ export async function getRelatedProducts(product: Product, limit = 4) {
 export function sortProducts(products: Product[]) {
   return [...products].sort((a, b) => a.sortOrder - b.sortOrder || a.name.localeCompare(b.name));
 }
-
-export function getProductImageSrc(product: Product, index = 0) {
-  const fileId = product.imageDriveIds[index];
-  return fileId ? `/api/drive-image/${encodeURIComponent(fileId)}` : "/placeholder-product.svg";
-}
