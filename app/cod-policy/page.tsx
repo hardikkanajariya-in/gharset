@@ -11,10 +11,12 @@ export default function PolicyPage() {
           <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
           <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">COD Policy</h1>
           <div className="prose-policy mt-4">
-            <p>COD is available on selected products after WhatsApp confirmation. Availability may depend on product stock, supplier support and delivery location. Orders are considered confirmed only after we verify your details and confirm the order on WhatsApp.</p>
-            <h2>Important points</h2>
-            <ul><li>We may cancel fake, incomplete or unreachable COD orders.</li><li>Customers should share accurate address and phone details.</li><li>COD amount is paid to the delivery partner at delivery time.</li><li>Product availability and delivery date may change before confirmation.</li></ul>
-            <p>For questions, contact us through the Contact page or WhatsApp support.</p>
+            <p>Cash on Delivery is available on selected GharSet products and serviceable pin codes. A website order is recorded first, then verified on WhatsApp before it is processed for dispatch.</p>
+            <h2>COD confirmation</h2>
+            <ul><li>Customer name, mobile number, full address and pincode must be accurate.</li><li>Orders with incomplete details, unreachable phone numbers or repeated failed delivery history may be cancelled.</li><li>Product availability, delivery charges and delivery estimate are confirmed before dispatch.</li><li>The payable amount is collected by the delivery partner at the time of delivery.</li></ul>
+            <h2>Refusal and fake order control</h2>
+            <ul><li>We may reject suspicious, duplicate or bulk COD orders.</li><li>Customers may be asked to reconfirm high-value, multi-item or paid-delivery orders on WhatsApp.</li><li>If the delivery partner is unable to reach the customer, the order may be marked failed or returned.</li></ul>
+            <p>For COD help, use the Contact page or WhatsApp support with your order number.</p>
           </div>
         </div>
       </Container>

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import type { CheckoutCustomer } from "@/types/cart";
 import {
   clearStoredCart,
+  getCartDeliveryCharge,
   getCartSubtotal,
   getStoredCart,
   type StoredCartItem
@@ -41,7 +42,9 @@ export function CheckoutForm() {
   const [error, setError] = useState("");
 
   const subtotal = useMemo(() => getCartSubtotal(items), [items]);
-  const finalAmount = coupon?.valid ? coupon.finalAmount : subtotal;
+  const deliveryCharge = useMemo(() => getCartDeliveryCharge(items), [items]);
+  const productTotalAfterDiscount = coupon?.valid ? coupon.finalAmount : subtotal;
+  const finalAmount = productTotalAfterDiscount + deliveryCharge;
   const discount = coupon?.valid ? coupon.discount : 0;
 
   function update(key: keyof CheckoutCustomer, value: string) {
@@ -161,7 +164,12 @@ export function CheckoutForm() {
         <div className="mt-4 space-y-3">
           {items.map((item) => (
             <div key={item.productId} className="flex justify-between gap-3 text-sm">
-              <span className="font-bold text-muted">{item.name} x {item.quantity}</span>
+              <span className="font-bold text-muted">
+                {item.name} x {item.quantity}
+                <span className="mt-0.5 block text-[11px] font-bold text-muted">
+                  {item.deliveryCharge ? `Delivery charge: ${formatPrice(item.deliveryCharge)}` : "Free delivery"}
+                </span>
+              </span>
               <span className="font-black text-ink">{formatPrice(item.price * item.quantity)}</span>
             </div>
           ))}
@@ -193,6 +201,7 @@ export function CheckoutForm() {
         <div className="mt-4 space-y-3 border-t border-line pt-4 text-sm">
           <SummaryRow label="Subtotal" value={formatPrice(subtotal)} />
           <SummaryRow label="Discount" value={`- ${formatPrice(discount)}`} />
+          <SummaryRow label="Delivery" value={deliveryCharge ? formatPrice(deliveryCharge) : "Free"} />
           <SummaryRow label="COD amount" value={formatPrice(finalAmount)} strong />
         </div>
         {error ? <p className="mt-3 rounded-xl bg-dangerBg p-3 text-xs font-bold text-dangerText">{error}</p> : null}

@@ -31,6 +31,9 @@ export function ProductCard({ product, whatsappNumber }: { product: Product; wha
         <div className="mt-3">
           <PriceBlock price={product.price} mrp={product.mrp} compact />
         </div>
+        <p className={`mt-2 text-[11px] font-black ${product.deliveryCharge ? "text-warningText" : "text-successText"}`}>
+          {product.deliveryCharge ? `Delivery ₹${product.deliveryCharge}` : "Free delivery"}
+        </p>
         <AddToCartButton product={product} className="mt-3 h-11 w-full text-xs sm:text-sm" />
       </div>
     </article>

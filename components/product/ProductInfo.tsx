@@ -39,6 +39,7 @@ export function ProductInfo({ product, whatsappNumber }: { product: Product; wha
         </DetailGroup>
         <DetailGroup title="Delivery and payment">
           <DetailRow label="Payment" value="COD after WhatsApp confirmation" />
+          <DetailRow label="Delivery" value={product.deliveryCharge ? `${formatPrice(product.deliveryCharge)} delivery charge may apply` : "Free delivery available"} />
           <DetailRow label="Order flow" value="Share details on WhatsApp, confirm availability, then COD order is processed." />
           <DetailRow label="Price" value={formatPrice(product.price)} />
         </DetailGroup>

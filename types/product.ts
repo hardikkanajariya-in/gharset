@@ -9,6 +9,7 @@ export type Product = {
   subcategory?: string;
   price: number;
   mrp?: number;
+  deliveryCharge?: number;
   supplierPrice?: number;
   margin?: number;
   imageDriveIds: string[];

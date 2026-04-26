@@ -59,6 +59,7 @@ export function checkoutOrderMessage({
   items,
   subtotal,
   discount,
+  deliveryCharge,
   finalAmount,
   couponCode,
   phoneLast4
@@ -68,6 +69,7 @@ export function checkoutOrderMessage({
   items: Array<{ product: Product; quantity: number; lineTotal: number }>;
   subtotal: number;
   discount: number;
+  deliveryCharge: number;
   finalAmount: number;
   couponCode?: string;
   phoneLast4: string;
@@ -96,6 +98,7 @@ export function checkoutOrderMessage({
     `Subtotal: ${formatPrice(subtotal)}`,
     couponCode ? `Coupon: ${couponCode}` : "Coupon: Not applied",
     `Discount: ${formatPrice(discount)}`,
+    `Delivery charge: ${deliveryCharge ? formatPrice(deliveryCharge) : "Free"}`,
     `COD amount: ${formatPrice(finalAmount)}`,
     customer.note ? `Customer note: ${customer.note}` : "",
     "",

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import {
+  getCartDeliveryCharge,
   getCartSubtotal,
   getStoredCart,
   updateCartQuantity,
@@ -19,6 +20,8 @@ export function CartView() {
   }
 
   const subtotal = getCartSubtotal(items);
+  const deliveryCharge = getCartDeliveryCharge(items);
+  const payable = subtotal + deliveryCharge;
 
   if (!items.length) {
     return (
@@ -56,7 +59,12 @@ export function CartView() {
               <Link href={`/product/${item.slug}`} className="mt-1 line-clamp-2 text-sm font-black text-ink hover:text-primary">
                 {item.name}
               </Link>
-              <p className="mt-2 text-base font-black text-ink">{formatPrice(item.price)}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-2">
+                <p className="text-base font-black text-ink">{formatPrice(item.price)}</p>
+                <span className={`rounded-full px-2 py-1 text-[10px] font-black ${item.deliveryCharge ? "bg-warningBg text-warningText" : "bg-successBg text-successText"}`}>
+                  {item.deliveryCharge ? `Delivery ${formatPrice(item.deliveryCharge)}` : "Free delivery"}
+                </span>
+              </div>
               <div className="mt-3 flex items-center gap-2">
                 <button
                   type="button"
@@ -100,6 +108,14 @@ export function CartView() {
           <div className="flex justify-between text-lg font-black text-ink">
             <span>Subtotal</span>
             <span>{formatPrice(subtotal)}</span>
+          </div>
+          <div className="flex justify-between font-bold text-muted">
+            <span>Delivery</span>
+            <span>{deliveryCharge ? formatPrice(deliveryCharge) : "Free"}</span>
+          </div>
+          <div className="flex justify-between border-t border-line pt-3 text-lg font-black text-ink">
+            <span>Total before coupon</span>
+            <span>{formatPrice(payable)}</span>
           </div>
         </div>
         <Link

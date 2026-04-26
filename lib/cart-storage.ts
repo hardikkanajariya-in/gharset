@@ -6,6 +6,7 @@ export type StoredCartItem = {
   name: string;
   price: number;
   mrp?: number;
+  deliveryCharge?: number;
   imageDriveIds: string[];
   imageAlt: string;
   category: string;
@@ -38,6 +39,7 @@ export function productToCartItem(product: Product, quantity = 1): StoredCartIte
     name: product.name,
     price: product.price,
     mrp: product.mrp,
+    deliveryCharge: product.deliveryCharge || 0,
     imageDriveIds: product.imageDriveIds,
     imageAlt: product.imageAlt,
     category: product.category,
@@ -77,6 +79,10 @@ export function clearStoredCart() {
 
 export function getCartSubtotal(items: StoredCartItem[]) {
   return items.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+
+export function getCartDeliveryCharge(items: Array<{ deliveryCharge?: number }>) {
+  return items.reduce((highest, item) => Math.max(highest, item.deliveryCharge || 0), 0);
 }
 
 export function getCartCount(items: StoredCartItem[]) {

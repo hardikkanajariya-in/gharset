@@ -23,6 +23,7 @@ export type Order = {
   productNames: string[];
   quantities?: number[];
   subtotal?: number;
+  deliveryCharge?: number;
   couponCode?: string;
   discount?: number;
   orderAmount?: number;

@@ -87,6 +87,10 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
   });
 
   const subtotal = items.reduce((total, item) => total + item.lineTotal, 0);
+  const deliveryCharge = items.reduce(
+    (highest, item) => Math.max(highest, item.product.deliveryCharge || 0),
+    0
+  );
   const coupon = await validateCoupon({
     code: payload.couponCode,
     subtotal,
@@ -118,7 +122,8 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
     items,
     subtotal,
     discount: coupon.discount,
-    finalAmount: coupon.finalAmount,
+    deliveryCharge,
+    finalAmount: coupon.finalAmount + deliveryCharge,
     couponCode: coupon.code,
     phoneLast4
   });
@@ -132,7 +137,7 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
       address,
       productIds.join("|"),
       productNames.join("|"),
-      coupon.finalAmount,
+      coupon.finalAmount + deliveryCharge,
       "",
       "",
       "COD",
@@ -147,6 +152,7 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
       customer.landmark || "",
       quantities.join("|"),
       subtotal,
+      deliveryCharge,
       coupon.code || "",
       coupon.discount,
       customer.alternatePhone || ""
@@ -158,8 +164,9 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
     phoneLast4,
     status: "New Order",
     subtotal,
+    deliveryCharge,
     discount: coupon.discount,
-    finalAmount: coupon.finalAmount,
+    finalAmount: coupon.finalAmount + deliveryCharge,
     couponCode: coupon.code,
     productNames,
     whatsappUrl: whatsappUrl(whatsappMessage, settings.whatsappNumber),

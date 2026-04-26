@@ -9,7 +9,7 @@ Create two spreadsheets.
 Header row:
 
 ```csv
-product_id,slug,name,short_description,category,subcategory,price,mrp,supplier_price,margin,image_1_drive_id,image_2_drive_id,image_3_drive_id,image_alt,material,dimensions,best_for,features,whats_in_box,stock_status,featured,visible,sort_order,tags
+product_id,slug,name,short_description,category,subcategory,price,mrp,delivery_charge,supplier_price,margin,image_1_drive_id,image_2_drive_id,image_3_drive_id,image_alt,material,dimensions,best_for,features,whats_in_box,stock_status,featured,visible,sort_order,tags
 ```
 
 Rules:
@@ -18,6 +18,7 @@ Rules:
 - `features` can be separated with `|`, comma, or new lines.
 - `tags` can be separated with comma or `|`.
 - `stock_status` values: `in_stock`, `out_of_stock`, `limited`.
+- `delivery_charge`: use `0` for free delivery or a number such as `49`.
 - `featured`: `yes` or `no`.
 - `visible`: `yes` or `no`.
 - Image columns should contain Google Drive file IDs, not full URLs.
@@ -86,7 +87,7 @@ Used by `/admin`. The admin image uploader writes Google Drive file IDs here, th
 ### Tab: `Orders`
 
 ```csv
-order_id,order_date,customer_name,phone,address,product_ids,product_names,order_amount,supplier_cost,profit,payment_method,status,tracking_note,expected_delivery,last_updated,internal_note,city,state,pincode,landmark,quantities,subtotal,coupon_code,discount,alternate_phone
+order_id,order_date,customer_name,phone,address,product_ids,product_names,order_amount,supplier_cost,profit,payment_method,status,tracking_note,expected_delivery,last_updated,internal_note,city,state,pincode,landmark,quantities,subtotal,delivery_charge,coupon_code,discount,alternate_phone
 ```
 
 Status suggestions:
