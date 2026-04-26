@@ -19,7 +19,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-The project runs with sample data by default because `USE_SAMPLE_DATA=true` in `.env.example`.
+The project reads product, order, coupon, offer and admin data from Google Sheets.
 
 ## Configure live Google Sheets/Drive
 
@@ -33,7 +33,7 @@ The project runs with sample data by default because `USE_SAMPLE_DATA=true` in `
 6. Share both spreadsheets with the service account email as Editor.
 7. Add the tabs and headers from `docs/google-sheets-schema.md`.
 8. Put spreadsheet IDs in `.env.local`.
-9. Set `USE_SAMPLE_DATA=false`.
+9. Confirm both spreadsheet IDs and Google service account credentials are present.
 
 ## Production deployment
 
@@ -61,7 +61,7 @@ Add the same environment variables in your Vercel project settings.
 
 ## Important notes
 
-- This is a COD-first catalog, not a full cart/checkout system.
-- Orders are manually confirmed over WhatsApp, then entered in the Orders sheet.
+- This is a COD-first catalog with cart and checkout, not an online payment checkout.
+- Orders are saved to the Orders sheet, then manually confirmed over WhatsApp.
 - The tracking page only exposes safe order fields after matching Order ID + phone last 4 digits.
 - Do not commit `.env.local`.

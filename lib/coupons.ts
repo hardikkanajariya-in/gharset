@@ -1,13 +1,10 @@
 import type { CartLineInput } from "@/types/cart";
 import type { Coupon, CouponValidation } from "@/types/coupon";
 import { mapCoupon } from "./mappers";
-import { readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
-import { sampleCoupons } from "./sample-data";
+import { readOptionalSheetValues, rowsToObjects } from "./google/sheets";
 
 export async function getCoupons(): Promise<Coupon[]> {
-  if (shouldUseSampleData()) return sampleCoupons;
-
-  const rows = await readSheetValues(
+  const rows = await readOptionalSheetValues(
     process.env.PRODUCTS_SPREADSHEET_ID,
     process.env.COUPONS_RANGE || "Coupons!A:Z"
   );

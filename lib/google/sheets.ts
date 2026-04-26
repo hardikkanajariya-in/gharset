@@ -9,10 +9,6 @@ export type SheetObject = Record<string, string>;
 const serviceAccountEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
 const privateKey = process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY?.replace(/\\n/g, "\n");
 
-export function shouldUseSampleData() {
-  return process.env.USE_SAMPLE_DATA === "true";
-}
-
 export function rowsToObjects(rows: SheetRows): SheetObject[] {
   const [headers = [], ...dataRows] = rows;
 
@@ -107,6 +103,22 @@ export async function readSheetValues(
   range: string
 ) {
   return cachedReadSheetValues(spreadsheetId || "", range);
+}
+
+export async function readOptionalSheetValues(
+  spreadsheetId: string | undefined,
+  range: string
+) {
+  try {
+    return await readSheetValues(spreadsheetId, range);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    if (message.includes("Unable to parse range")) {
+      return [];
+    }
+
+    throw error;
+  }
 }
 
 export async function appendSheetValues(

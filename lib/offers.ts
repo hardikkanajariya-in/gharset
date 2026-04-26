@@ -1,12 +1,9 @@
 import type { OfferBanner } from "@/types/offer";
 import { mapOffer } from "./mappers";
-import { readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
-import { sampleOffers } from "./sample-data";
+import { readOptionalSheetValues, rowsToObjects } from "./google/sheets";
 
 export async function getActiveOffers(limit = 3): Promise<OfferBanner[]> {
-  if (shouldUseSampleData()) return sampleOffers.filter((offer) => offer.active).slice(0, limit);
-
-  const rows = await readSheetValues(
+  const rows = await readOptionalSheetValues(
     process.env.PRODUCTS_SPREADSHEET_ID,
     process.env.OFFERS_RANGE || "Offers!A:Z"
   );

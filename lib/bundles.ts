@@ -1,16 +1,13 @@
 import type { Bundle } from "@/types/bundle";
 import type { Product } from "@/types/product";
 import { mapBundle } from "./mappers";
-import { sampleBundles } from "./sample-data";
-import { readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
+import { readOptionalSheetValues, rowsToObjects } from "./google/sheets";
 import { getVisibleProducts } from "./products";
 
 export async function getBundles(): Promise<Bundle[]> {
-  if (shouldUseSampleData()) return sortBundles(sampleBundles).filter((bundle) => bundle.visible);
-
-  const rows = await readSheetValues(process.env.PRODUCTS_SPREADSHEET_ID, process.env.BUNDLES_RANGE || "Bundles!A:Z");
+  const rows = await readOptionalSheetValues(process.env.PRODUCTS_SPREADSHEET_ID, process.env.BUNDLES_RANGE || "Bundles!A:Z");
   const mapped = rowsToObjects(rows).map(mapBundle);
-  return sortBundles(mapped.length ? mapped : sampleBundles).filter((bundle) => bundle.visible);
+  return sortBundles(mapped).filter((bundle) => bundle.visible);
 }
 
 export async function getFeaturedBundles(limit = 4) {

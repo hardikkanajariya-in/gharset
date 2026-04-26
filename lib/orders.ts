@@ -1,8 +1,7 @@
 import type { Order, SafeOrder } from "@/types/order";
 import type { CheckoutPayload } from "@/types/cart";
-import { appendSheetValues, readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
+import { appendSheetValues, readSheetValues, rowsToObjects } from "./google/sheets";
 import { mapOrder } from "./mappers";
-import { sampleOrders } from "./sample-data";
 import { getLastFour } from "./utils";
 import { getVisibleProducts } from "./products";
 import { validateCoupon } from "./coupons";
@@ -10,7 +9,6 @@ import { checkoutOrderMessage, whatsappUrl } from "./whatsapp";
 import { getStoreSettings } from "./settings";
 
 export async function getOrders(): Promise<Order[]> {
-  if (shouldUseSampleData()) return sampleOrders;
   const rows = await readSheetValues(process.env.ORDERS_SPREADSHEET_ID, process.env.ORDERS_RANGE || "Orders!A:Z");
   const mapped = rowsToObjects(rows).map(mapOrder);
   return mapped.length ? mapped : [];
@@ -128,36 +126,34 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
     phoneLast4
   });
 
-  if (!shouldUseSampleData()) {
-    await appendSheetValues(process.env.ORDERS_SPREADSHEET_ID, process.env.ORDERS_RANGE || "Orders!A:Z", [
-      orderId,
-      createdAt,
-      customer.name,
-      cleanPhone,
-      address,
-      productIds.join("|"),
-      productNames.join("|"),
-      coupon.finalAmount + deliveryCharge,
-      "",
-      "",
-      "COD",
-      "New Order",
-      "Website checkout submitted. Awaiting WhatsApp final confirmation.",
-      "After WhatsApp confirmation",
-      createdAt,
-      customer.note || "",
-      customer.city,
-      customer.state || "",
-      customer.pincode,
-      customer.landmark || "",
-      quantities.join("|"),
-      subtotal,
-      deliveryCharge,
-      coupon.code || "",
-      coupon.discount,
-      customer.alternatePhone || ""
-    ]);
-  }
+  await appendSheetValues(process.env.ORDERS_SPREADSHEET_ID, process.env.ORDERS_RANGE || "Orders!A:Z", [
+    orderId,
+    createdAt,
+    customer.name,
+    cleanPhone,
+    address,
+    productIds.join("|"),
+    productNames.join("|"),
+    coupon.finalAmount + deliveryCharge,
+    "",
+    "",
+    "COD",
+    "New Order",
+    "Website checkout submitted. Awaiting WhatsApp final confirmation.",
+    "After WhatsApp confirmation",
+    createdAt,
+    customer.note || "",
+    customer.city,
+    customer.state || "",
+    customer.pincode,
+    customer.landmark || "",
+    quantities.join("|"),
+    subtotal,
+    deliveryCharge,
+    coupon.code || "",
+    coupon.discount,
+    customer.alternatePhone || ""
+  ]);
 
   return {
     orderId,
@@ -169,8 +165,7 @@ export async function createCheckoutOrder(payload: CheckoutPayload) {
     finalAmount: coupon.finalAmount + deliveryCharge,
     couponCode: coupon.code,
     productNames,
-    whatsappUrl: whatsappUrl(whatsappMessage, settings.whatsappNumber),
-    sampleMode: shouldUseSampleData()
+    whatsappUrl: whatsappUrl(whatsappMessage, settings.whatsappNumber)
   };
 }
 
@@ -185,10 +180,6 @@ export async function createLead(input: {
   const leadId = `GS-LD-${Date.now()}`;
   const createdAt = new Date().toISOString();
 
-  if (shouldUseSampleData()) {
-    return { leadId, sampleMode: true };
-  }
-
   await appendSheetValues(process.env.ORDERS_SPREADSHEET_ID, process.env.LEADS_RANGE || "Leads!A:Z", [
     leadId,
     createdAt,
@@ -201,5 +192,5 @@ export async function createLead(input: {
     "New"
   ]);
 
-  return { leadId, sampleMode: false };
+  return { leadId };
 }

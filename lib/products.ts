@@ -1,14 +1,11 @@
 import type { Product } from "@/types/product";
 import { mapProduct } from "./mappers";
-import { sampleProducts } from "./sample-data";
-import { readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
+import { readSheetValues, rowsToObjects } from "./google/sheets";
 
 export async function getAllProducts(): Promise<Product[]> {
-  if (shouldUseSampleData()) return sortProducts(sampleProducts);
-
   const rows = await readSheetValues(process.env.PRODUCTS_SPREADSHEET_ID, process.env.PRODUCTS_RANGE || "Products!A:Z");
   const mapped = rowsToObjects(rows).map(mapProduct);
-  return sortProducts(mapped.length ? mapped : sampleProducts);
+  return sortProducts(mapped);
 }
 
 export async function getVisibleProducts() {

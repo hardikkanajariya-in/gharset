@@ -8,7 +8,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Default mode uses sample data, so the site should load without Google credentials.
+The site requires Google Sheets and Drive credentials because real Sheets data is the only supported data source.
 
 ## Google setup
 
@@ -16,7 +16,7 @@ Default mode uses sample data, so the site should load without Google credential
 2. Create a service account.
 3. Share the product and order spreadsheets with the service account email.
 4. Add the service account email/private key and spreadsheet IDs to `.env.local`.
-5. Set `USE_SAMPLE_DATA=false`.
+5. Confirm Google Sheets IDs and service account credentials are configured.
 
 ## Vercel
 
@@ -33,8 +33,8 @@ Default mode uses sample data, so the site should load without Google credential
 
 ## Manual COD operations
 
-1. Customer clicks WhatsApp order.
-2. Confirm product, address and COD support manually.
-3. Add order to Orders sheet.
-4. Send order ID to customer.
+1. Customer adds products to cart and submits checkout details.
+2. The site creates an order row in the Orders sheet.
+3. WhatsApp opens with the order/customer details prefilled.
+4. Confirm availability, address and COD support manually.
 5. Customer checks `/track-order` with order ID + phone last 4 digits.

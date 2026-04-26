@@ -8,7 +8,6 @@ import {
   appendSheetValues,
   readSheetValuesUncached,
   rowsToObjects,
-  shouldUseSampleData,
   updateSheetRowByKey
 } from "./google/sheets";
 import { uploadDriveImage } from "./google/drive";
@@ -24,6 +23,7 @@ const COOKIE_NAME = "gharset_admin";
 
 export async function validateAdminLogin(username: string, password: string) {
   const creds = await getAdminCredentials();
+  console.log("Validating admin login", { username, password: password ? "****" : "(empty)" });
   return username === creds.username && password === creds.password;
 }
 
@@ -66,8 +66,6 @@ export async function getAdminProducts() {
 }
 
 export async function getImageLibrary(): Promise<AdminImage[]> {
-  if (shouldUseSampleData()) return [];
-
   const rows = await readSheetValuesUncached(
     process.env.PRODUCTS_SPREADSHEET_ID,
     process.env.IMAGE_LIBRARY_RANGE || "ImageLibrary!A:Z"
@@ -106,13 +104,11 @@ export async function uploadAdminImages(files: File[]) {
 
     uploaded.push(image);
 
-    if (!shouldUseSampleData()) {
-      await appendSheetValues(
-        process.env.PRODUCTS_SPREADSHEET_ID,
-        process.env.IMAGE_LIBRARY_RANGE || "ImageLibrary!A:Z",
-        [image.fileId, image.name, image.mimeType || "", image.createdAt]
-      );
-    }
+    await appendSheetValues(
+      process.env.PRODUCTS_SPREADSHEET_ID,
+      process.env.IMAGE_LIBRARY_RANGE || "ImageLibrary!A:Z",
+      [image.fileId, image.name, image.mimeType || "", image.createdAt]
+    );
   }
 
   return uploaded;
@@ -134,10 +130,6 @@ export async function updateProductImages({
     throw new Error("Product not found.");
   }
 
-  if (shouldUseSampleData()) {
-    return { productId, sampleMode: true };
-  }
-
   await updateSheetRowByKey({
     spreadsheetId: process.env.PRODUCTS_SPREADSHEET_ID,
     sheetName: "Products",
@@ -151,23 +143,19 @@ export async function updateProductImages({
     }
   });
 
-  return { productId, sampleMode: false };
+  return { productId };
 }
 
 async function getAdminCredentials() {
-  if (shouldUseSampleData()) {
-    return { username: "admin", password: "admin123" };
-  }
-
   const rows = await readSheetValuesUncached(
     process.env.PRODUCTS_SPREADSHEET_ID,
     process.env.SETTINGS_RANGE || "Settings!A:B"
   );
   const settings = new Map(rowsToObjects(rows).map((row) => [row.key, row.value]));
-
+  
   return {
-    username: settings.get("admin_username") || process.env.ADMIN_USERNAME || "admin",
-    password: settings.get("admin_password") || process.env.ADMIN_PASSWORD || ""
+    username: settings.get("admin_username"),
+    password: settings.get("admin_password")
   };
 }
 
