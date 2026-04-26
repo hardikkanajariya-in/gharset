@@ -1,0 +1,4 @@
+bundle_id,slug,name,short_description,product_ids,price,mrp,image_drive_id,visible,featured,sort_order
+BND-001,kitchen-clean-setup,Kitchen Clean Setup,"A starter kit to organize sink, oil bottles, spices and fridge space.",GS-KIT-001|GS-KIT-002|GS-KIT-003|GS-FRG-001,899,1299,,yes,yes,1
+BND-002,bathroom-fresh-setup,Bathroom Fresh Setup,Compact holders and shelves for cleaner bathroom counters.,GS-BTH-001|GS-BTH-002|GS-ROM-001,599,899,,yes,yes,2
+BND-003,rented-room-setup,Rented Room Setup,"Budget organizers for rented flats, PG rooms and small spaces.",GS-ROM-001|GS-WRD-001|GS-BTH-002,499,747,,yes,yes,3

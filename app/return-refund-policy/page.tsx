@@ -8,8 +8,8 @@ export default function PolicyPage() {
     <section className="compact-section">
       <Container className="max-w-3xl">
         <div className="page-panel p-5 sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
-          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Return & Refund Policy</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">Return & Refund Policy</h1>
           <div className="prose-policy mt-4">
             <p>Returns, replacements and refunds are handled by GharSet according to product eligibility, issue type, delivery status and quality-check outcome. Not every product is returnable for every reason.</p>
             <h2>Return window</h2>

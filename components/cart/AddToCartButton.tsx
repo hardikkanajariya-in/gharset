@@ -38,7 +38,7 @@ export function AddToCartButton({
       disabled={disabled}
       onClick={add}
       className={cn(
-        "focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98] disabled:bg-mutedSurface disabled:text-muted",
+        "focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98] disabled:bg-mutedSurface disabled:text-muted",
         className
       )}
     >

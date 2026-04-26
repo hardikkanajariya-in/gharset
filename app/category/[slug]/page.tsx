@@ -57,7 +57,7 @@ export default async function CategoryPage({
           eyebrow="Category"
           title={category.name}
           description={category.description}
-          aside={<span className="rounded-full bg-mutedSurface px-3 py-2 text-xs font-black text-mutedStrong">Fast product discovery</span>}
+          aside={<span className="rounded-full bg-mutedSurface px-3 py-2 text-xs font-semibold text-mutedStrong">Fast product discovery</span>}
         />
         <ListingToolbar categories={categories} activeHref={`/category/${category.slug}`} resultCount={products.length} />
         <div className="mt-5">

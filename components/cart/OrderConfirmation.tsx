@@ -34,8 +34,8 @@ export function OrderConfirmation() {
     <div className="mx-auto max-w-2xl">
       <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
         <div className="bg-primaryDark p-5 text-white sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-successBg">Order placed</p>
-          <h1 className="mt-2 text-[28px] font-black tracking-tight sm:text-[36px]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-successBg">Order placed</p>
+          <h1 className="mt-2 text-[28px] font-semibold tracking-tight sm:text-[36px]">
             Your COD order is recorded.
           </h1>
           <p className="mt-2 text-sm font-medium leading-6 text-blue-100">
@@ -51,13 +51,13 @@ export function OrderConfirmation() {
 
           {order ? (
             <div className="rounded-2xl border border-line bg-background p-4">
-              <p className="text-sm font-black text-ink">Order summary</p>
+              <p className="text-sm font-semibold text-ink">Order summary</p>
               <ul className="mt-3 space-y-2 text-sm font-medium text-muted">
                 {order.productNames.map((name) => <li key={name}>+ {name}</li>)}
               </ul>
               <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-sm">
-                <span className="font-bold text-muted">COD amount</span>
-                <span className="text-lg font-black text-ink">{formatPrice(order.finalAmount)}</span>
+                <span className="font-medium text-muted">COD amount</span>
+                <span className="text-lg font-semibold text-ink">{formatPrice(order.finalAmount)}</span>
               </div>
             </div>
           ) : null}
@@ -68,14 +68,14 @@ export function OrderConfirmation() {
                 href={order.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring inline-flex h-12 items-center justify-center rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp"
+                className="focus-ring inline-flex h-12 items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp"
               >
                 Continue on WhatsApp
               </a>
             ) : null}
             <Link
               href={`/track-order?orderId=${encodeURIComponent(orderId)}&last4=${encodeURIComponent(last4)}`}
-              className="focus-ring inline-flex h-12 items-center justify-center rounded-xl border border-lineStrong bg-white px-4 text-sm font-black text-primary"
+              className="focus-ring inline-flex h-12 items-center justify-center rounded-xl border border-lineStrong bg-white px-4 text-sm font-semibold text-primary"
             >
               Track order
             </Link>
@@ -89,8 +89,8 @@ export function OrderConfirmation() {
 function Info({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-line bg-background p-4">
-      <p className="text-xs font-black uppercase tracking-[0.12em] text-muted">{label}</p>
-      <p className="mt-1 text-xl font-black text-ink">{value}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">{label}</p>
+      <p className="mt-1 text-xl font-semibold text-ink">{value}</p>
     </div>
   );
 }

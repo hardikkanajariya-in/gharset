@@ -39,7 +39,7 @@ export default async function ShopPage({
           eyebrow="Shop"
           title="Shop all organizers"
           description="Browse compact kitchen, bathroom, fridge, wardrobe and daily-use home organizers."
-          aside={<span className="rounded-full bg-primarySoft px-3 py-2 text-xs font-black text-primary">COD order on WhatsApp</span>}
+          aside={<span className="rounded-full bg-primarySoft px-3 py-2 text-xs font-semibold text-primary">COD order on WhatsApp</span>}
         />
 
         <ListingToolbar categories={categories} activeHref="/shop" resultCount={products.length} />

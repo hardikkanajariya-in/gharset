@@ -1,0 +1,3 @@
+code,description,type,value,min_order_amount,max_discount,active,expires_at,usage_note
+GHARSET50,Launch coupon,fixed,50,499,50,yes,2026-12-31,₹50 off applied.
+SET10,Cart value coupon,percent,10,999,150,yes,2026-12-31,10% off applied.

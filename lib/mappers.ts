@@ -119,6 +119,7 @@ export function mapOffer(row: Row): OfferBanner {
     title: row.title || "GharSet offer",
     description: row.description || "Useful home organizers at better prices.",
     badge: row.badge || "",
+    imageDriveId: row.image_drive_id || "",
     href: row.href || "/shop",
     active: normalizeYesNo(row.active, true),
     sortOrder: toNumber(row.sort_order, 999)

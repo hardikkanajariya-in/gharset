@@ -151,18 +151,18 @@ export function AdminImageManager() {
   if (!authenticated) {
     return (
       <form onSubmit={login} className="mx-auto max-w-md page-panel grid gap-3 p-4">
-        <label className="grid gap-1 text-sm font-bold text-ink">
+        <label className="grid gap-1 text-sm font-medium text-ink">
           Username
           <input value={username} onChange={(event) => setUsername(event.target.value)} className="control-input" />
         </label>
-        <label className="grid gap-1 text-sm font-bold text-ink">
+        <label className="grid gap-1 text-sm font-medium text-ink">
           Password
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="control-input" />
         </label>
-        <button className="focus-ring h-11 rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp">
+        <button className="focus-ring h-11 rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp">
           {loading ? "Checking..." : "Login"}
         </button>
-        {message ? <p className="text-sm font-bold text-dangerText">{message}</p> : null}
+        {message ? <p className="text-sm font-medium text-dangerText">{message}</p> : null}
       </form>
     );
   }
@@ -172,12 +172,12 @@ export function AdminImageManager() {
       <div className="page-panel p-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-sm font-black text-ink">Image library</p>
+            <p className="text-sm font-semibold text-ink">Image library</p>
             <p className="mt-1 text-sm font-medium text-muted">
               Upload multiple images once, then assign them to products below.
             </p>
           </div>
-          <label className="focus-within:ring-secondary focus-within:ring-2 inline-flex h-11 cursor-pointer items-center justify-center rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp">
+          <label className="focus-within:ring-secondary focus-within:ring-2 inline-flex h-11 cursor-pointer items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp">
             Upload images
             <input
               type="file"
@@ -193,7 +193,7 @@ export function AdminImageManager() {
             <div className="h-full bg-secondary transition-all" style={{ width: `${uploadProgress}%` }} />
           </div>
         ) : null}
-        {message ? <p className="mt-3 text-sm font-bold text-mutedStrong">{message}</p> : null}
+        {message ? <p className="mt-3 text-sm font-medium text-mutedStrong">{message}</p> : null}
       </div>
 
       <div className="overflow-x-auto rounded-2xl border border-line bg-white shadow-soft">
@@ -215,8 +215,8 @@ export function AdminImageManager() {
               return (
                 <tr key={product.productId} className="border-t border-line align-top">
                   <td className="p-3">
-                    <p className="font-black text-ink">{product.name}</p>
-                    <p className="mt-1 text-xs font-bold text-muted">{product.productId}</p>
+                    <p className="font-semibold text-ink">{product.name}</p>
+                    <p className="mt-1 text-xs font-medium text-muted">{product.productId}</p>
                     <p className="mt-1 text-xs font-medium text-muted">{product.category}</p>
                   </td>
                   {[0, 1, 2].map((index) => (
@@ -239,7 +239,7 @@ export function AdminImageManager() {
                     <button
                       type="button"
                       onClick={() => saveProduct(product.productId)}
-                      className="focus-ring h-10 rounded-xl bg-primary px-4 text-xs font-black text-white shadow-crisp"
+                      className="focus-ring h-10 rounded-xl bg-primary px-4 text-xs font-semibold text-white shadow-crisp"
                     >
                       Save
                     </button>
@@ -283,5 +283,5 @@ function ImageSelect({
 }
 
 function Th({ children }: { children: ReactNode }) {
-  return <th className="p-3 text-xs font-black uppercase tracking-[0.12em]">{children}</th>;
+  return <th className="p-3 text-xs font-semibold uppercase tracking-[0.12em]">{children}</th>;
 }

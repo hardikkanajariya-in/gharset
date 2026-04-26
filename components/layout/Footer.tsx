@@ -42,7 +42,7 @@ export function Footer({
             <div className="max-w-sm">
               <Link
                 href="/"
-                className="inline-flex text-xl font-black tracking-tight text-white"
+                className="inline-flex text-xl font-semibold tracking-tight text-white"
               >
                 {BRAND.name}
               </Link>
@@ -57,21 +57,21 @@ export function Footer({
                   href={whatsappUrl(suggestionMessage(), whatsappNumber)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-white px-4 text-xs font-bold text-primaryDark transition hover:bg-primarySoft"
+                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-white px-4 text-xs font-medium text-primaryDark transition hover:bg-primarySoft"
                 >
                   WhatsApp support
                 </a>
 
                 <Link
                   href="/track-order"
-                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-white/25 bg-white/10 px-4 text-xs font-bold text-white transition hover:bg-white/15"
+                  className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-white/25 bg-white/10 px-4 text-xs font-medium text-white transition hover:bg-white/15"
                 >
                   Track order
                 </Link>
               </div>
 
               <div className="mt-5 rounded-2xl border border-white/15 bg-white/[0.08] p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-successBg">
+                <p className="text-xs font-medium uppercase tracking-[0.14em] text-successBg">
                   COD-first ordering
                 </p>
                 <p className="mt-2 text-sm leading-6 text-blue-100">
@@ -87,7 +87,7 @@ export function Footer({
               <FooterGroup title="Company" links={companyLinks} />
 
               <div className="mt-5 rounded-2xl border border-white/15 bg-white/[0.08] p-4 text-xs leading-6 text-blue-100">
-                <p className="font-bold text-white">Contact</p>
+                <p className="font-medium text-white">Contact</p>
                 <a
                   href={`mailto:${supportEmail}`}
                   className="mt-1 block break-all hover:text-white"
@@ -110,7 +110,7 @@ export function Footer({
                 href="https://hardikkanajariya.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-white underline-offset-4 transition hover:underline"
+                className="font-medium text-white underline-offset-4 transition hover:underline"
               >
                 hardikkanajariya.in
               </a>
@@ -133,7 +133,7 @@ function FooterGroup({
 }) {
   return (
     <nav aria-label={title}>
-      <p className="text-sm font-bold text-white">{title}</p>
+      <p className="text-sm font-medium text-white">{title}</p>
 
       <ul className="mt-3 space-y-2">
         {links.map(([label, href]) => (

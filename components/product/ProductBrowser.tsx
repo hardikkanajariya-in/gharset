@@ -36,7 +36,7 @@ export function ProductBrowser({ products, whatsappNumber, filters = defaultFilt
               type="button"
               onClick={() => setActive(filter)}
               className={cn(
-                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-black transition",
+                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition",
                 active === filter ? "border-primary bg-primary text-white" : "border-line bg-white text-muted hover:text-ink"
               )}
             >
@@ -44,7 +44,7 @@ export function ProductBrowser({ products, whatsappNumber, filters = defaultFilt
             </button>
           ))}
         </div>
-        <label className="grid gap-1 text-xs font-black uppercase tracking-[0.12em] text-muted sm:block">
+        <label className="grid gap-1 text-xs font-semibold uppercase tracking-[0.12em] text-muted sm:block">
           <span className="sr-only">Search products</span>
           <input
             value={query}

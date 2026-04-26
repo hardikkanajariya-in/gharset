@@ -8,8 +8,8 @@ export default function PolicyPage() {
     <section className="compact-section">
       <Container className="max-w-3xl">
         <div className="page-panel p-5 sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
-          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">COD Policy</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">COD Policy</h1>
           <div className="prose-policy mt-4">
             <p>Cash on Delivery is available on selected GharSet products and serviceable pin codes. A website order is recorded first, then verified on WhatsApp before it is processed for dispatch.</p>
             <h2>COD confirmation</h2>

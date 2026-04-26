@@ -8,8 +8,8 @@ export default function PolicyPage() {
     <section className="compact-section">
       <Container className="max-w-3xl">
         <div className="page-panel p-5 sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
-          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Privacy Policy</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">Privacy Policy</h1>
           <div className="prose-policy mt-4">
             <p>GharSet collects customer information only to process orders, provide support, prevent misuse and improve the shopping experience.</p>
             <h2>Information we collect</h2>

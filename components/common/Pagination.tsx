@@ -29,15 +29,15 @@ export function Pagination({
       className="mt-7 flex flex-col items-center justify-between gap-3 rounded-2xl border border-line bg-white p-3 shadow-soft sm:flex-row"
     >
       <p className="text-xs font-medium text-muted">
-        Page <span className="font-bold text-ink">{currentPage}</span> of{" "}
-        <span className="font-bold text-ink">{totalPages}</span>
+        Page <span className="font-medium text-ink">{currentPage}</span> of{" "}
+        <span className="font-medium text-ink">{totalPages}</span>
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-1.5">
         <Link
           href={createPageHref(basePath, currentPage - 1)}
           aria-disabled={currentPage <= 1}
-        className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
+        className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-medium transition ${
             currentPage <= 1
               ? "pointer-events-none border-line bg-mutedSurface text-muted"
               : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
@@ -51,7 +51,7 @@ export function Pagination({
             key={page}
             href={createPageHref(basePath, page)}
             aria-current={page === currentPage ? "page" : undefined}
-            className={`focus-ring inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
+            className={`focus-ring inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 text-xs font-medium transition ${
               page === currentPage
                 ? "border-primary bg-primary text-white"
                 : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
@@ -64,7 +64,7 @@ export function Pagination({
         <Link
           href={createPageHref(basePath, currentPage + 1)}
           aria-disabled={currentPage >= totalPages}
-          className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-bold transition ${
+          className={`focus-ring inline-flex h-10 items-center justify-center rounded-xl border px-3 text-xs font-medium transition ${
             currentPage >= totalPages
               ? "pointer-events-none border-line bg-mutedSurface text-muted"
               : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"

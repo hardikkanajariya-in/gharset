@@ -1,0 +1,11 @@
+key,value
+whatsapp_number,91XXXXXXXXXX
+cod_enabled,yes
+announcement_text,COD available on selected products · WhatsApp order support · New organizer kits added
+default_delivery_note,Delivery usually takes 4-7 working days after confirmation.
+support_email,support@gharset.in
+site_url,http://localhost:3000
+brand_name,GharSet
+brand_tagline,Smart organizers for every Indian home.
+admin_username,admin
+admin_password,change-this-password

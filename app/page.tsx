@@ -4,7 +4,6 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 import { BundleGrid } from "@/components/bundle/BundleGrid";
 import { HeroSection } from "@/components/home/HeroSection";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { OfferBanners } from "@/components/home/OfferBanners";
 import { ShopByProblem } from "@/components/home/ShopByProblem";
 import { TrustSection } from "@/components/home/TrustSection";
 import { ProductGrid } from "@/components/product/ProductGrid";
@@ -25,14 +24,13 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroSection whatsappNumber={settings.whatsappNumber} />
-      <OfferBanners offers={offers} />
+      <HeroSection whatsappNumber={settings.whatsappNumber} offers={offers} />
       <ShopByProblem />
       <section className="compact-section">
         <Container>
           <div className="flex items-end justify-between gap-4">
             <SectionHeader title="Featured organizers" description="A compact selection of practical daily-use products." />
-            <Link href="/shop" className="hidden rounded-full border border-lineStrong bg-white px-4 py-2 text-sm font-black text-primary shadow-soft transition hover:border-primary sm:inline-flex">View all</Link>
+            <Link href="/shop" className="hidden rounded-full border border-lineStrong bg-white px-4 py-2 text-sm font-semibold text-primary shadow-soft transition hover:border-primary sm:inline-flex">View all</Link>
           </div>
           <div className="mt-5">
             <ProductGrid products={featuredProducts} whatsappNumber={settings.whatsappNumber} />

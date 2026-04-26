@@ -8,8 +8,8 @@ export default function PolicyPage() {
     <section className="compact-section">
       <Container className="max-w-3xl">
         <div className="page-panel p-5 sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
-          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Terms & Conditions</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">Terms & Conditions</h1>
           <div className="prose-policy mt-4">
             <p>By using GharSet, placing an order or contacting us for support, you agree to these terms and the related shipping, COD, return and privacy policies.</p>
             <h2>Catalog and product information</h2>

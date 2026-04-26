@@ -9,8 +9,8 @@ export function ProductInfo({ product, whatsappNumber }: { product: Product; wha
   void whatsappNumber;
   return (
     <div className="lg:sticky lg:top-24">
-      <p className="text-[11px] font-black uppercase tracking-[0.16em] text-secondary">{product.category}</p>
-      <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">{product.name}</h1>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-secondary">{product.category}</p>
+      <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">{product.name}</h1>
       <p className="mt-2 text-sm font-medium leading-6 text-muted">{product.shortDescription}</p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <PriceBlock price={product.price} mrp={product.mrp} />
@@ -22,7 +22,7 @@ export function ProductInfo({ product, whatsappNumber }: { product: Product; wha
       </div>
 
       <div className="mt-5 rounded-2xl border border-line bg-white p-4 shadow-soft">
-        <p className="text-sm font-black text-ink">Key benefits</p>
+        <p className="text-sm font-semibold text-ink">Key benefits</p>
         <ul className="mt-3 space-y-2 text-sm font-medium leading-6 text-muted">
           {(product.features.length ? product.features : ["Useful for daily home organization", "Compact and budget-friendly", "Confirm availability before COD order"]).map((feature) => (
             <li key={feature} className="flex gap-2"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />{feature}</li>
@@ -56,7 +56,7 @@ export function ProductInfo({ product, whatsappNumber }: { product: Product; wha
 function DetailGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
     <details className="group border-b border-line last:border-b-0" open>
-      <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-black text-ink">
+      <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-sm font-semibold text-ink">
         {title}
         <span className="text-muted transition group-open:rotate-45">+</span>
       </summary>
@@ -70,7 +70,7 @@ function DetailRow({ label, value }: { label: string; value?: string }) {
   return (
     <div className="grid grid-cols-[104px_1fr] gap-3 px-4 py-3 sm:grid-cols-[120px_1fr]">
       <span className="font-medium text-muted">{label}</span>
-      <span className="font-bold text-ink">{value}</span>
+      <span className="font-medium text-ink">{value}</span>
     </div>
   );
 }

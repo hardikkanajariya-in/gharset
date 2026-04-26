@@ -8,8 +8,8 @@ export default function PolicyPage() {
     <section className="compact-section">
       <Container className="max-w-3xl">
         <div className="page-panel p-5 sm:p-6">
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-secondary">Policy</p>
-          <h1 className="mt-2 text-[26px] font-black tracking-tight text-ink sm:text-[34px]">Shipping Policy</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-secondary">Policy</p>
+          <h1 className="mt-2 text-[26px] font-semibold tracking-tight text-ink sm:text-[34px]">Shipping Policy</h1>
           <div className="prose-policy mt-4">
             <p>GharSet ships confirmed orders through third-party delivery partners. Delivery availability, delivery charges and expected timelines may vary by product, location, order value and courier coverage.</p>
             <h2>Delivery timeline</h2>

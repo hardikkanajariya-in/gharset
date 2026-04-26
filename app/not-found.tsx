@@ -62,10 +62,10 @@ export default function NotFound() {
           <div className="border-b border-line bg-primaryDark px-4 py-4 text-white sm:px-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-[11px] font-black uppercase tracking-[0.18em] text-blue-100">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-100">
                   404
                 </p>
-                <h1 className="mt-1 text-xl font-black tracking-tight text-white sm:text-2xl">
+                <h1 className="mt-1 text-xl font-semibold tracking-tight text-white sm:text-2xl">
                   Page not found
                 </h1>
               </div>
@@ -100,7 +100,7 @@ export default function NotFound() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/shop"
-                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98]"
+                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98]"
               >
                 Go to shop
               </Link>
@@ -108,7 +108,7 @@ export default function NotFound() {
               <button
                 type="button"
                 onClick={() => window.history.back()}
-                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-lineStrong bg-white px-5 text-sm font-black text-ink transition hover:border-secondary hover:text-secondary active:scale-[0.98]"
+                className="focus-ring inline-flex h-11 items-center justify-center rounded-xl border border-lineStrong bg-white px-5 text-sm font-semibold text-ink transition hover:border-secondary hover:text-secondary active:scale-[0.98]"
               >
                 Go back
               </button>
@@ -117,7 +117,7 @@ export default function NotFound() {
             <div className="mt-5">
               <label
                 htmlFor="not-found-search"
-                className="text-xs font-black uppercase tracking-[0.14em] text-muted"
+                className="text-xs font-semibold uppercase tracking-[0.14em] text-muted"
               >
                 Find a section
               </label>
@@ -149,7 +149,7 @@ export default function NotFound() {
                   <button
                     type="button"
                     onClick={() => setQuery("")}
-                    className="ml-2 rounded-full px-2 py-1 text-xs font-black text-muted transition hover:bg-mutedSurface hover:text-ink"
+                    className="ml-2 rounded-full px-2 py-1 text-xs font-semibold text-muted transition hover:bg-mutedSurface hover:text-ink"
                   >
                     Clear
                   </button>
@@ -167,7 +167,7 @@ export default function NotFound() {
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <p className="text-sm font-black text-ink transition group-hover:text-secondary">
+                        <p className="text-sm font-semibold text-ink transition group-hover:text-secondary">
                           {item.label}
                         </p>
                         <p className="mt-1 text-xs font-medium leading-5 text-muted">
@@ -183,7 +183,7 @@ export default function NotFound() {
                 ))
               ) : (
                 <div className="rounded-2xl border border-line bg-mutedSurface p-4 sm:col-span-2">
-                  <p className="text-sm font-black text-ink">No matching section found</p>
+                  <p className="text-sm font-semibold text-ink">No matching section found</p>
                   <p className="mt-1 text-xs font-medium leading-5 text-muted">
                     Try searching for shop, kitchen, bathroom, combo, or order tracking.
                   </p>

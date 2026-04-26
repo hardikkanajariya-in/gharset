@@ -36,12 +36,12 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
     <header className="sticky top-0 z-50 border-b border-line bg-white/97 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="focus-ring flex items-center gap-2 rounded-xl">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-sm font-black text-white shadow-crisp">
+          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-sm font-semibold text-white shadow-crisp">
             GS
           </span>
           <span>
-            <span className="block text-lg font-black tracking-tight text-ink">{BRAND.name}</span>
-            <span className="hidden text-[11px] font-bold text-muted sm:block">{BRAND.tagline}</span>
+            <span className="block text-lg font-semibold tracking-tight text-ink">{BRAND.name}</span>
+            <span className="hidden text-[11px] font-medium text-muted sm:block">{BRAND.tagline}</span>
           </span>
         </Link>
 
@@ -51,7 +51,7 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
               key={item.href}
               href={item.href}
               className={cn(
-                "focus-ring rounded-xl px-3 py-2 text-sm font-bold transition",
+                "focus-ring rounded-xl px-3 py-2 text-sm font-medium transition",
                 isActive(item.href)
                   ? "bg-primarySoft text-primary"
                   : "text-muted hover:bg-mutedSurface hover:text-ink"
@@ -66,7 +66,7 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
           <Link
             href="/cart"
             className={cn(
-              "focus-ring rounded-xl border px-4 py-2.5 text-sm font-bold transition",
+              "focus-ring rounded-xl border px-4 py-2.5 text-sm font-medium transition",
               isActive("/cart")
                 ? "border-primary bg-primarySoft text-primary"
                 : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
@@ -78,7 +78,7 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
             href={whatsappUrl(suggestionMessage(), whatsappNumber)}
             target="_blank"
             rel="noopener noreferrer"
-            className="focus-ring rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98]"
+            className="focus-ring rounded-xl bg-primary px-4 py-2.5 text-sm font-medium text-white shadow-crisp transition hover:bg-primaryDark active:scale-[0.98]"
           >
             WhatsApp Help
           </a>
@@ -112,7 +112,7 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "rounded-xl px-3 py-3 text-sm font-bold transition",
+                  "rounded-xl px-3 py-3 text-sm font-medium transition",
                   isActive(item.href)
                     ? "bg-primary text-white"
                     : "text-ink hover:bg-white"
@@ -126,7 +126,7 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
             href={whatsappUrl(suggestionMessage(), whatsappNumber)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 flex h-12 items-center justify-center rounded-xl bg-primary px-4 text-sm font-bold text-white shadow-crisp"
+            className="mt-3 flex h-12 items-center justify-center rounded-xl bg-primary px-4 text-sm font-medium text-white shadow-crisp"
           >
             WhatsApp Help
           </a>

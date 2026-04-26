@@ -38,7 +38,7 @@ export function ListingToolbar({
               key={item.href}
               href={item.href}
               className={cn(
-                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-black transition",
+                "focus-ring whitespace-nowrap rounded-full border px-3 py-2 text-xs font-semibold transition",
                 activeHref === item.href
                   ? "border-primary bg-primary text-white"
                   : "border-lineStrong bg-white text-mutedStrong hover:border-secondary hover:text-secondary"
@@ -49,9 +49,9 @@ export function ListingToolbar({
           ))}
         </div>
 
-        <div className="flex items-center justify-between gap-3 text-xs font-bold text-muted sm:justify-end">
+        <div className="flex items-center justify-between gap-3 text-xs font-medium text-muted sm:justify-end">
           <span>
-            <span className="font-black text-ink">{resultCount}</span> {label}
+            <span className="font-semibold text-ink">{resultCount}</span> {label}
           </span>
           <span className="rounded-full bg-mutedSurface px-3 py-1.5 text-mutedStrong">
             Sorted by relevance

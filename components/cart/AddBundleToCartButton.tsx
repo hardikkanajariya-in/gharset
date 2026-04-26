@@ -34,7 +34,7 @@ export function AddBundleToCartButton({
         type="button"
         onClick={addBundle}
         disabled={!availableProducts.length}
-        className="focus-ring h-11 rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark disabled:bg-mutedSurface disabled:text-muted"
+        className="focus-ring h-11 rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp transition hover:bg-primaryDark disabled:bg-mutedSurface disabled:text-muted"
       >
         {added ? "Added to cart" : "Add bundle to cart"}
       </button>
@@ -42,7 +42,7 @@ export function AddBundleToCartButton({
         type="button"
         onClick={checkoutBundle}
         disabled={!availableProducts.length}
-        className="focus-ring h-11 rounded-xl border border-lineStrong bg-white px-4 text-sm font-black text-primary transition hover:bg-primarySoft disabled:bg-mutedSurface disabled:text-muted"
+        className="focus-ring h-11 rounded-xl border border-lineStrong bg-white px-4 text-sm font-semibold text-primary transition hover:bg-primarySoft disabled:bg-mutedSurface disabled:text-muted"
       >
         Checkout bundle
       </button>

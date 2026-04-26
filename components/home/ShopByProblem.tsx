@@ -20,11 +20,11 @@ export function ShopByProblem() {
           {problems.map((item) => (
             <Link key={item.title} href={item.href} className="group rounded-2xl border border-line bg-white p-3 shadow-soft transition hover:-translate-y-0.5 hover:border-lineStrong hover:shadow-lift sm:p-4">
               <div className="flex items-start gap-3">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primarySoft text-xs font-black text-primary transition group-hover:bg-primary group-hover:text-white">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primarySoft text-xs font-semibold text-primary transition group-hover:bg-primary group-hover:text-white">
                   {item.code}
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-sm font-black text-ink">{item.title}</span>
+                  <span className="block text-sm font-semibold text-ink">{item.title}</span>
                   <span className="mt-1 line-clamp-2 block text-xs font-medium leading-5 text-muted sm:text-sm">{item.text}</span>
                 </span>
               </div>

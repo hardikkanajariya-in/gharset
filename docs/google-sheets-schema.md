@@ -69,10 +69,10 @@ Rules:
 ### Tab: `Offers`
 
 ```csv
-offer_id,title,description,badge,href,active,sort_order
+offer_id,title,description,badge,image_drive_id,href,active,sort_order
 ```
 
-Used for homepage offer banners. `href` can point to `/combo-kits`, `/under-499`, `/category/kitchen-organizers`, etc.
+Used for homepage offer banners and the hero carousel. `image_drive_id` is optional but recommended for the hero. `href` can point to `/combo-kits`, `/under-499`, `/category/kitchen-organizers`, etc.
 
 ### Tab: `ImageLibrary`
 

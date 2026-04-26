@@ -112,9 +112,9 @@ export function CheckoutForm() {
   if (!items.length) {
     return (
       <div className="page-panel p-5 text-center">
-        <p className="text-base font-black text-ink">Your cart is empty</p>
+        <p className="text-base font-semibold text-ink">Your cart is empty</p>
         <p className="mt-1 text-sm font-medium text-muted">Add products before checkout.</p>
-        <Link href="/shop" className="focus-ring mt-4 inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-black text-white shadow-crisp">
+        <Link href="/shop" className="focus-ring mt-4 inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white shadow-crisp">
           Shop products
         </Link>
       </div>
@@ -132,7 +132,7 @@ export function CheckoutForm() {
           <Field label="Alternate mobile" value={customer.alternatePhone || ""} onChange={(value) => update("alternatePhone", value)} />
           <Field label="Pincode" value={customer.pincode} onChange={(value) => update("pincode", value)} required />
         </div>
-        <label className="grid gap-1 text-sm font-bold text-ink">
+        <label className="grid gap-1 text-sm font-medium text-ink">
           Delivery address
           <textarea
             value={customer.address}
@@ -147,7 +147,7 @@ export function CheckoutForm() {
           <Field label="State" value={customer.state || ""} onChange={(value) => update("state", value)} />
           <Field label="Landmark" value={customer.landmark || ""} onChange={(value) => update("landmark", value)} />
         </div>
-        <label className="grid gap-1 text-sm font-bold text-ink">
+        <label className="grid gap-1 text-sm font-medium text-ink">
           Order note
           <textarea
             value={customer.note || ""}
@@ -160,22 +160,22 @@ export function CheckoutForm() {
       </div>
 
       <aside className="page-panel h-fit p-4">
-        <p className="text-sm font-black text-ink">Order summary</p>
+        <p className="text-sm font-semibold text-ink">Order summary</p>
         <div className="mt-4 space-y-3">
           {items.map((item) => (
             <div key={item.productId} className="flex justify-between gap-3 text-sm">
-              <span className="font-bold text-muted">
+              <span className="font-medium text-muted">
                 {item.name} x {item.quantity}
-                <span className="mt-0.5 block text-[11px] font-bold text-muted">
+                <span className="mt-0.5 block text-[11px] font-medium text-muted">
                   {item.deliveryCharge ? `Delivery charge: ${formatPrice(item.deliveryCharge)}` : "Free delivery"}
                 </span>
               </span>
-              <span className="font-black text-ink">{formatPrice(item.price * item.quantity)}</span>
+              <span className="font-semibold text-ink">{formatPrice(item.price * item.quantity)}</span>
             </div>
           ))}
         </div>
         <div className="mt-4 border-t border-line pt-4">
-          <label className="text-xs font-black uppercase tracking-[0.12em] text-muted">Coupon code</label>
+          <label className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">Coupon code</label>
           <div className="mt-2 flex gap-2">
             <input
               value={couponCode}
@@ -187,13 +187,13 @@ export function CheckoutForm() {
               type="button"
               onClick={applyCoupon}
               disabled={loadingCoupon || !couponCode.trim()}
-              className="focus-ring h-11 rounded-xl border border-lineStrong bg-white px-3 text-xs font-black text-primary disabled:opacity-60"
+              className="focus-ring h-11 rounded-xl border border-lineStrong bg-white px-3 text-xs font-semibold text-primary disabled:opacity-60"
             >
               {loadingCoupon ? "Checking" : "Apply"}
             </button>
           </div>
           {coupon ? (
-            <p className={`mt-2 text-xs font-bold ${coupon.valid ? "text-successText" : "text-dangerText"}`}>
+            <p className={`mt-2 text-xs font-medium ${coupon.valid ? "text-successText" : "text-dangerText"}`}>
               {coupon.message}
             </p>
           ) : null}
@@ -204,10 +204,10 @@ export function CheckoutForm() {
           <SummaryRow label="Delivery" value={deliveryCharge ? formatPrice(deliveryCharge) : "Free"} />
           <SummaryRow label="COD amount" value={formatPrice(finalAmount)} strong />
         </div>
-        {error ? <p className="mt-3 rounded-xl bg-dangerBg p-3 text-xs font-bold text-dangerText">{error}</p> : null}
+        {error ? <p className="mt-3 rounded-xl bg-dangerBg p-3 text-xs font-medium text-dangerText">{error}</p> : null}
         <button
           disabled={placing}
-          className="focus-ring mt-5 h-12 w-full rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark disabled:opacity-70"
+          className="focus-ring mt-5 h-12 w-full rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp transition hover:bg-primaryDark disabled:opacity-70"
         >
           {placing ? "Placing order..." : "Place COD order"}
         </button>
@@ -231,7 +231,7 @@ function Field({
   required?: boolean;
 }) {
   return (
-    <label className="grid gap-1 text-sm font-bold text-ink">
+    <label className="grid gap-1 text-sm font-medium text-ink">
       {label}
       <input
         value={value}
@@ -245,7 +245,7 @@ function Field({
 
 function SummaryRow({ label, value, strong = false }: { label: string; value: string; strong?: boolean }) {
   return (
-    <div className={`flex justify-between gap-3 ${strong ? "text-lg font-black text-ink" : "font-bold text-muted"}`}>
+    <div className={`flex justify-between gap-3 ${strong ? "text-lg font-semibold text-ink" : "font-medium text-muted"}`}>
       <span>{label}</span>
       <span>{value}</span>
     </div>

@@ -11,7 +11,7 @@ export function OrderStatusTimeline({ status }: { status: string }) {
         return (
           <div key={step} className="flex items-center gap-3 rounded-xl border border-line bg-white px-3 py-2 text-sm">
             <span className={cn("h-2.5 w-2.5 rounded-full", done ? "bg-successText" : "bg-lineStrong", active && "ring-4 ring-successBg")} />
-            <span className={done ? "font-bold text-ink" : "font-medium text-muted"}>{step}</span>
+            <span className={done ? "font-medium text-ink" : "font-medium text-muted"}>{step}</span>
           </div>
         );
       })}

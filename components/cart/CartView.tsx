@@ -26,13 +26,13 @@ export function CartView() {
   if (!items.length) {
     return (
       <div className="page-panel p-5 text-center">
-        <p className="text-base font-black text-ink">Your cart is empty</p>
+        <p className="text-base font-semibold text-ink">Your cart is empty</p>
         <p className="mt-1 text-sm font-medium text-muted">
           Add organizers to review your COD order summary.
         </p>
         <Link
           href="/shop"
-          className="focus-ring mt-4 inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-black text-white shadow-crisp"
+          className="focus-ring mt-4 inline-flex h-11 items-center justify-center rounded-xl bg-primary px-5 text-sm font-semibold text-white shadow-crisp"
         >
           Shop products
         </Link>
@@ -53,15 +53,15 @@ export function CartView() {
               />
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[11px] font-black uppercase tracking-[0.12em] text-secondary">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-secondary">
                 {item.category}
               </p>
-              <Link href={`/product/${item.slug}`} className="mt-1 line-clamp-2 text-sm font-black text-ink hover:text-primary">
+              <Link href={`/product/${item.slug}`} className="mt-1 line-clamp-2 text-sm font-semibold text-ink hover:text-primary">
                 {item.name}
               </Link>
               <div className="mt-2 flex flex-wrap items-center gap-2">
-                <p className="text-base font-black text-ink">{formatPrice(item.price)}</p>
-                <span className={`rounded-full px-2 py-1 text-[10px] font-black ${item.deliveryCharge ? "bg-warningBg text-warningText" : "bg-successBg text-successText"}`}>
+                <p className="text-base font-semibold text-ink">{formatPrice(item.price)}</p>
+                <span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${item.deliveryCharge ? "bg-warningBg text-warningText" : "bg-successBg text-successText"}`}>
                   {item.deliveryCharge ? `Delivery ${formatPrice(item.deliveryCharge)}` : "Free delivery"}
                 </span>
               </div>
@@ -70,25 +70,25 @@ export function CartView() {
                   type="button"
                   onClick={() => update(item.productId, item.quantity - 1)}
                   aria-label={`Decrease ${item.name} quantity`}
-                  className="focus-ring h-9 w-9 rounded-xl border border-lineStrong bg-white text-sm font-black text-ink"
+                  className="focus-ring h-9 w-9 rounded-xl border border-lineStrong bg-white text-sm font-semibold text-ink"
                 >
                   -
                 </button>
-                <span className="flex h-9 min-w-10 items-center justify-center rounded-xl bg-mutedSurface px-3 text-sm font-black text-ink">
+                <span className="flex h-9 min-w-10 items-center justify-center rounded-xl bg-mutedSurface px-3 text-sm font-semibold text-ink">
                   {item.quantity}
                 </span>
                 <button
                   type="button"
                   onClick={() => update(item.productId, item.quantity + 1)}
                   aria-label={`Increase ${item.name} quantity`}
-                  className="focus-ring h-9 w-9 rounded-xl border border-lineStrong bg-white text-sm font-black text-ink"
+                  className="focus-ring h-9 w-9 rounded-xl border border-lineStrong bg-white text-sm font-semibold text-ink"
                 >
                   +
                 </button>
                 <button
                   type="button"
                   onClick={() => update(item.productId, 0)}
-                  className="focus-ring ml-auto rounded-xl px-3 py-2 text-xs font-black text-accent hover:bg-accentSoft"
+                  className="focus-ring ml-auto rounded-xl px-3 py-2 text-xs font-semibold text-accent hover:bg-accentSoft"
                 >
                   Remove
                 </button>
@@ -99,28 +99,28 @@ export function CartView() {
       </div>
 
       <aside className="page-panel h-fit p-4">
-        <p className="text-sm font-black text-ink">Order summary</p>
+        <p className="text-sm font-semibold text-ink">Order summary</p>
         <div className="mt-4 space-y-3 text-sm">
-          <div className="flex justify-between font-bold text-muted">
+          <div className="flex justify-between font-medium text-muted">
             <span>Items</span>
             <span>{items.reduce((total, item) => total + item.quantity, 0)}</span>
           </div>
-          <div className="flex justify-between text-lg font-black text-ink">
+          <div className="flex justify-between text-lg font-semibold text-ink">
             <span>Subtotal</span>
             <span>{formatPrice(subtotal)}</span>
           </div>
-          <div className="flex justify-between font-bold text-muted">
+          <div className="flex justify-between font-medium text-muted">
             <span>Delivery</span>
             <span>{deliveryCharge ? formatPrice(deliveryCharge) : "Free"}</span>
           </div>
-          <div className="flex justify-between border-t border-line pt-3 text-lg font-black text-ink">
+          <div className="flex justify-between border-t border-line pt-3 text-lg font-semibold text-ink">
             <span>Total before coupon</span>
             <span>{formatPrice(payable)}</span>
           </div>
         </div>
         <Link
           href="/checkout"
-          className="focus-ring mt-5 inline-flex h-12 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark"
+          className="focus-ring mt-5 inline-flex h-12 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-crisp transition hover:bg-primaryDark"
         >
           Continue to checkout
         </Link>

@@ -3,6 +3,7 @@ export type OfferBanner = {
   title: string;
   description: string;
   badge?: string;
+  imageDriveId?: string;
   href: string;
   active: boolean;
   sortOrder: number;

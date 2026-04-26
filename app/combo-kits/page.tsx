@@ -21,7 +21,7 @@ export default async function ComboKitsPage() {
           eyebrow="Bundles"
           title="Combo kits"
           description="Higher-value bundles that solve one home organization problem at a time."
-          aside={<span className="rounded-full bg-accentSoft px-3 py-2 text-xs font-black text-accent">Savings shown clearly</span>}
+          aside={<span className="rounded-full bg-accentSoft px-3 py-2 text-xs font-semibold text-accent">Savings shown clearly</span>}
         />
         <ListingToolbar categories={categories} activeHref="/combo-kits" resultCount={bundles.length} label="Kits" />
         <div className="mt-5">

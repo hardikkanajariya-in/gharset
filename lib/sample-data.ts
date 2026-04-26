@@ -324,6 +324,7 @@ export const sampleOffers: OfferBanner[] = [
     title: "Kitchen reset under ₹999",
     description: "Build a compact kitchen setup with sink, spice and fridge organizers.",
     badge: "Combo value",
+    imageDriveId: "",
     href: "/combo-kits",
     active: true,
     sortOrder: 1
@@ -333,6 +334,7 @@ export const sampleOffers: OfferBanner[] = [
     title: "Budget organizers under ₹499",
     description: "Small daily-use upgrades for bathrooms, shelves and rented rooms.",
     badge: "Budget picks",
+    imageDriveId: "",
     href: "/under-499",
     active: true,
     sortOrder: 2
