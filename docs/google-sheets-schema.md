@@ -48,14 +48,45 @@ whatsapp_number,91XXXXXXXXXX
 cod_enabled,yes
 announcement_text,COD available on selected products · WhatsApp order support
 default_delivery_note,Delivery usually takes 4–7 working days after confirmation.
+admin_username,admin
+admin_password,change-this-password
 ```
+
+### Tab: `Coupons`
+
+```csv
+code,description,type,value,min_order_amount,max_discount,active,expires_at,usage_note
+```
+
+Rules:
+
+- `type`: `fixed` or `percent`.
+- `value`: discount amount for fixed coupons, percentage for percent coupons.
+- `expires_at`: optional date like `2026-05-31`.
+- Coupons are validated server-side before the checkout order is created.
+
+### Tab: `Offers`
+
+```csv
+offer_id,title,description,badge,href,active,sort_order
+```
+
+Used for homepage offer banners. `href` can point to `/combo-kits`, `/under-499`, `/category/kitchen-organizers`, etc.
+
+### Tab: `ImageLibrary`
+
+```csv
+file_id,name,mime_type,created_at
+```
+
+Used by `/admin`. The admin image uploader writes Google Drive file IDs here, then the product image manager writes selected IDs back to `Products.image_1_drive_id`, `image_2_drive_id`, and `image_3_drive_id`.
 
 ## Spreadsheet 2: `GharSet Orders`
 
 ### Tab: `Orders`
 
 ```csv
-order_id,order_date,customer_name,phone,address,product_ids,product_names,order_amount,supplier_cost,profit,payment_method,status,tracking_note,expected_delivery,last_updated,internal_note
+order_id,order_date,customer_name,phone,address,product_ids,product_names,order_amount,supplier_cost,profit,payment_method,status,tracking_note,expected_delivery,last_updated,internal_note,city,state,pincode,landmark,quantities,subtotal,coupon_code,discount,alternate_phone
 ```
 
 Status suggestions:

@@ -1,5 +1,7 @@
 import type { Bundle } from "@/types/bundle";
 import type { Category } from "@/types/category";
+import type { Coupon } from "@/types/coupon";
+import type { OfferBanner } from "@/types/offer";
 import type { Order } from "@/types/order";
 import type { Product } from "@/types/product";
 import type { StoreSettings } from "@/types/settings";
@@ -282,6 +284,50 @@ export const sampleBundles: Bundle[] = [
     visible: true,
     featured: true,
     sortOrder: 3
+  }
+];
+
+export const sampleCoupons: Coupon[] = [
+  {
+    code: "GHARSET50",
+    description: "Sample launch coupon",
+    type: "fixed",
+    value: 50,
+    minOrderAmount: 499,
+    maxDiscount: 50,
+    active: true,
+    usageNote: "₹50 off applied."
+  },
+  {
+    code: "SET10",
+    description: "Sample percent coupon",
+    type: "percent",
+    value: 10,
+    minOrderAmount: 999,
+    maxDiscount: 150,
+    active: true,
+    usageNote: "10% off applied."
+  }
+];
+
+export const sampleOffers: OfferBanner[] = [
+  {
+    offerId: "OFF-001",
+    title: "Kitchen reset under ₹999",
+    description: "Build a compact kitchen setup with sink, spice and fridge organizers.",
+    badge: "Combo value",
+    href: "/combo-kits",
+    active: true,
+    sortOrder: 1
+  },
+  {
+    offerId: "OFF-002",
+    title: "Budget organizers under ₹499",
+    description: "Small daily-use upgrades for bathrooms, shelves and rented rooms.",
+    badge: "Budget picks",
+    href: "/under-499",
+    active: true,
+    sortOrder: 2
   }
 ];
 

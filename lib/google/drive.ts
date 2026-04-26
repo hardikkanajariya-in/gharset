@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { Readable } from "stream";
 import { getGoogleAuth } from "./sheets";
 
 export type DriveImageResult = {
@@ -33,4 +34,47 @@ export async function downloadDriveFile(fileId: string): Promise<DriveImageResul
   }
 
   return null;
+}
+
+export async function uploadDriveImage({
+  buffer,
+  filename,
+  mimeType
+}: {
+  buffer: Buffer;
+  filename: string;
+  mimeType: string;
+}) {
+  const auth = await getGoogleAuth();
+
+  if (!auth) {
+    throw new Error("Missing Google Drive credentials.");
+  }
+
+  const drive = google.drive({ version: "v3", auth });
+  const response = await drive.files.create({
+    requestBody: {
+      name: filename,
+      mimeType,
+      parents: process.env.GOOGLE_DRIVE_UPLOAD_FOLDER_ID
+        ? [process.env.GOOGLE_DRIVE_UPLOAD_FOLDER_ID]
+        : undefined
+    },
+    media: {
+      mimeType,
+      body: Readable.from(buffer)
+    },
+    fields: "id,name,mimeType,webViewLink"
+  });
+
+  if (!response.data.id) {
+    throw new Error("Google Drive did not return a file ID.");
+  }
+
+  return {
+    fileId: response.data.id,
+    name: response.data.name || filename,
+    mimeType: response.data.mimeType || mimeType,
+    webViewLink: response.data.webViewLink || ""
+  };
 }

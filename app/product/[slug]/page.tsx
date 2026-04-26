@@ -5,7 +5,7 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductInfo } from "@/components/product/ProductInfo";
 import { RelatedProducts } from "@/components/product/RelatedProducts";
 import { PriceBlock } from "@/components/product/PriceBlock";
-import { WhatsAppOrderButton } from "@/components/product/WhatsAppOrderButton";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { getProductBySlug, getRelatedProducts, getVisibleProducts } from "@/lib/products";
 import { getStoreSettings } from "@/lib/settings";
 import { siteMetadata } from "@/lib/seo";
@@ -50,7 +50,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white p-3 shadow-lift sm:hidden">
         <div className="mx-auto flex max-w-[430px] items-center gap-3">
           <div className="flex-1"><PriceBlock price={product.price} mrp={product.mrp} compact /></div>
-          <WhatsAppOrderButton product={product} phone={settings.whatsappNumber} className="h-12 min-w-[156px]" />
+          <AddToCartButton product={product} buyNow className="h-12 min-w-[156px]" />
         </div>
       </div>
     </>

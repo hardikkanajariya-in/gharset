@@ -42,6 +42,7 @@ export function getGoogleAuth() {
     key: privateKey,
     scopes: [
       "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/drive.file",
       "https://www.googleapis.com/auth/drive.readonly"
     ]
   });
@@ -58,6 +59,19 @@ function getSheetsClient() {
   }
 
   return google.sheets({ version: "v4", auth });
+}
+
+function columnLetter(index: number) {
+  let value = index + 1;
+  let result = "";
+
+  while (value > 0) {
+    const remainder = (value - 1) % 26;
+    result = String.fromCharCode(65 + remainder) + result;
+    value = Math.floor((value - 1) / 26);
+  }
+
+  return result;
 }
 
 async function readSheetValuesRaw(
@@ -113,6 +127,69 @@ export async function appendSheetValues(
     insertDataOption: "INSERT_ROWS",
     requestBody: {
       values: [values.map((value) => value ?? "")]
+    }
+  });
+}
+
+export async function readSheetValuesUncached(
+  spreadsheetId: string | undefined,
+  range: string
+) {
+  return readSheetValuesRaw(spreadsheetId, range);
+}
+
+export async function updateSheetRowByKey({
+  spreadsheetId,
+  sheetName,
+  keyHeader,
+  keyValue,
+  updates
+}: {
+  spreadsheetId: string | undefined;
+  sheetName: string;
+  keyHeader: string;
+  keyValue: string;
+  updates: Record<string, string>;
+}) {
+  if (!spreadsheetId) {
+    throw new Error("Missing Google spreadsheet ID.");
+  }
+
+  const rows = await readSheetValuesRaw(spreadsheetId, `${sheetName}!A:Z`);
+  const [headers = [], ...dataRows] = rows;
+  const keyIndex = headers.indexOf(keyHeader);
+
+  if (keyIndex === -1) {
+    throw new Error(`Missing ${keyHeader} column in ${sheetName}.`);
+  }
+
+  const rowIndex = dataRows.findIndex((row) => String(row[keyIndex] || "").trim() === keyValue);
+
+  if (rowIndex === -1) {
+    throw new Error(`Could not find ${keyValue} in ${sheetName}.`);
+  }
+
+  const sheets = getSheetsClient();
+  const data = Object.entries(updates).map(([header, value]) => {
+    const columnIndex = headers.indexOf(header);
+    if (columnIndex === -1) {
+      throw new Error(`Missing ${header} column in ${sheetName}.`);
+    }
+
+    const rowNumber = rowIndex + 2;
+    const column = columnLetter(columnIndex);
+
+    return {
+      range: `${sheetName}!${column}${rowNumber}`,
+      values: [[value]]
+    };
+  });
+
+  await sheets.spreadsheets.values.batchUpdate({
+    spreadsheetId,
+    requestBody: {
+      valueInputOption: "USER_ENTERED",
+      data
     }
   });
 }

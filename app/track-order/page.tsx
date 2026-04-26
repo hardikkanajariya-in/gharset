@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Container } from "@/components/common/Container";
 import { PageHeader } from "@/components/common/PageHeader";
 import { TrackOrderForm } from "@/components/order/TrackOrderForm";
@@ -14,7 +15,11 @@ export default function TrackOrderPage() {
           title="Track your GharSet order"
           description="Enter your order ID and the last 4 digits of your phone number to view the latest safe status."
         />
-        <div className="mt-5"><TrackOrderForm /></div>
+        <div className="mt-5">
+          <Suspense fallback={null}>
+            <TrackOrderForm />
+          </Suspense>
+        </div>
       </Container>
     </section>
   );

@@ -4,12 +4,14 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 import { BundleGrid } from "@/components/bundle/BundleGrid";
 import { HeroSection } from "@/components/home/HeroSection";
 import { HowItWorks } from "@/components/home/HowItWorks";
+import { OfferBanners } from "@/components/home/OfferBanners";
 import { ShopByProblem } from "@/components/home/ShopByProblem";
 import { TrustSection } from "@/components/home/TrustSection";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { getFeaturedBundles, getBundleProducts } from "@/lib/bundles";
 import { getFeaturedProducts, getProductsUnderPrice } from "@/lib/products";
 import { getStoreSettings } from "@/lib/settings";
+import { getActiveOffers } from "@/lib/offers";
 
 export const revalidate = 900;
 
@@ -18,11 +20,13 @@ export default async function HomePage() {
   const featuredProducts = await getFeaturedProducts(8);
   const under499 = await getProductsUnderPrice(499);
   const bundles = await getFeaturedBundles(3);
+  const offers = await getActiveOffers(2);
   const bundleItems = await Promise.all(bundles.map(async (bundle) => ({ bundle, products: await getBundleProducts(bundle) })));
 
   return (
     <>
       <HeroSection whatsappNumber={settings.whatsappNumber} />
+      <OfferBanners offers={offers} />
       <ShopByProblem />
       <section className="compact-section">
         <Container>

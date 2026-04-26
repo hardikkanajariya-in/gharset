@@ -1,11 +1,12 @@
 import Link from "next/link";
 import type { Product } from "@/types/product";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { PriceBlock } from "./PriceBlock";
 import { ProductImage } from "./ProductImage";
 import { StockBadge } from "./StockBadge";
-import { WhatsAppOrderButton } from "./WhatsAppOrderButton";
 
 export function ProductCard({ product, whatsappNumber }: { product: Product; whatsappNumber: string }) {
+  void whatsappNumber;
   const under499 = product.price <= 499;
   const popular = product.featured || product.tags.some((tag) => tag.toLowerCase().includes("popular"));
 
@@ -30,7 +31,7 @@ export function ProductCard({ product, whatsappNumber }: { product: Product; wha
         <div className="mt-3">
           <PriceBlock price={product.price} mrp={product.mrp} compact />
         </div>
-        <WhatsAppOrderButton product={product} phone={whatsappNumber} className="mt-3 h-11 w-full text-xs sm:text-sm" />
+        <AddToCartButton product={product} className="mt-3 h-11 w-full text-xs sm:text-sm" />
       </div>
     </article>
   );

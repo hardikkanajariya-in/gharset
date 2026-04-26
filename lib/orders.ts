@@ -1,8 +1,13 @@
 import type { Order, SafeOrder } from "@/types/order";
+import type { CheckoutPayload } from "@/types/cart";
 import { appendSheetValues, readSheetValues, rowsToObjects, shouldUseSampleData } from "./google/sheets";
 import { mapOrder } from "./mappers";
 import { sampleOrders } from "./sample-data";
 import { getLastFour } from "./utils";
+import { getVisibleProducts } from "./products";
+import { validateCoupon } from "./coupons";
+import { checkoutOrderMessage, whatsappUrl } from "./whatsapp";
+import { getStoreSettings } from "./settings";
 
 export async function getOrders(): Promise<Order[]> {
   if (shouldUseSampleData()) return sampleOrders;
@@ -35,6 +40,130 @@ export function toSafeOrder(order: Order): SafeOrder {
     trackingNote: order.trackingNote,
     expectedDelivery: order.expectedDelivery,
     lastUpdated: order.lastUpdated
+  };
+}
+
+export async function createCheckoutOrder(payload: CheckoutPayload) {
+  const customer = payload.customer;
+  const cleanPhone = customer.phone.replace(/\D/g, "");
+  const phoneLast4 = getLastFour(customer.phone);
+
+  if (!customer.name.trim() || cleanPhone.length < 10) {
+    throw new Error("Customer name and valid mobile number are required.");
+  }
+
+  if (!customer.address.trim() || !customer.city.trim() || !customer.pincode.trim()) {
+    throw new Error("Delivery address, city and pincode are required.");
+  }
+
+  const requestedItems = payload.items
+    .map((item) => ({
+      productId: item.productId,
+      quantity: Math.max(1, Math.min(20, Number(item.quantity) || 1))
+    }))
+    .filter((item) => item.productId);
+
+  if (!requestedItems.length) {
+    throw new Error("Add at least one product to place an order.");
+  }
+
+  const products = await getVisibleProducts();
+  const items = requestedItems.map((item) => {
+    const product = products.find((entry) => entry.productId === item.productId);
+
+    if (!product) {
+      throw new Error("One or more products are no longer available.");
+    }
+
+    if (product.stockStatus === "out_of_stock") {
+      throw new Error(`${product.name} is currently unavailable.`);
+    }
+
+    return {
+      product,
+      quantity: item.quantity,
+      lineTotal: product.price * item.quantity
+    };
+  });
+
+  const subtotal = items.reduce((total, item) => total + item.lineTotal, 0);
+  const coupon = await validateCoupon({
+    code: payload.couponCode,
+    subtotal,
+    items: requestedItems
+  });
+
+  if (payload.couponCode && !coupon.valid) {
+    throw new Error(coupon.message);
+  }
+
+  const orderId = `GS-${Date.now().toString().slice(-8)}`;
+  const createdAt = new Date().toISOString();
+  const productIds = items.map((item) => item.product.productId);
+  const productNames = items.map((item) => item.product.name);
+  const quantities = items.map((item) => item.quantity);
+  const address = [
+    customer.address,
+    customer.landmark ? `Landmark: ${customer.landmark}` : "",
+    customer.city,
+    customer.state,
+    customer.pincode
+  ]
+    .filter(Boolean)
+    .join(", ");
+  const settings = await getStoreSettings();
+  const whatsappMessage = checkoutOrderMessage({
+    orderId,
+    customer,
+    items,
+    subtotal,
+    discount: coupon.discount,
+    finalAmount: coupon.finalAmount,
+    couponCode: coupon.code,
+    phoneLast4
+  });
+
+  if (!shouldUseSampleData()) {
+    await appendSheetValues(process.env.ORDERS_SPREADSHEET_ID, process.env.ORDERS_RANGE || "Orders!A:Z", [
+      orderId,
+      createdAt,
+      customer.name,
+      cleanPhone,
+      address,
+      productIds.join("|"),
+      productNames.join("|"),
+      coupon.finalAmount,
+      "",
+      "",
+      "COD",
+      "New Order",
+      "Website checkout submitted. Awaiting WhatsApp final confirmation.",
+      "After WhatsApp confirmation",
+      createdAt,
+      customer.note || "",
+      customer.city,
+      customer.state || "",
+      customer.pincode,
+      customer.landmark || "",
+      quantities.join("|"),
+      subtotal,
+      coupon.code || "",
+      coupon.discount,
+      customer.alternatePhone || ""
+    ]);
+  }
+
+  return {
+    orderId,
+    phoneLast4,
+    status: "New Order",
+    subtotal,
+    discount: coupon.discount,
+    finalAmount: coupon.finalAmount,
+    couponCode: coupon.code,
+    productNames,
+    whatsappUrl: whatsappUrl(whatsappMessage, settings.whatsappNumber),
+    sampleMode: shouldUseSampleData()
   };
 }
 

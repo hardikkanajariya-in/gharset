@@ -26,7 +26,7 @@ export default async function RootLayout({
   const settings = await getStoreSettings();
 
   return (
-    <html lang="en-IN">
+    <html lang="en-IN" data-scroll-behavior="smooth">
       <body>
         <Suspense fallback={null}>
           <SiteNavigationLoader />

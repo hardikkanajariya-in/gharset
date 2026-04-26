@@ -1,5 +1,7 @@
 import type { Bundle } from "@/types/bundle";
 import type { Category } from "@/types/category";
+import type { Coupon, CouponType } from "@/types/coupon";
+import type { OfferBanner } from "@/types/offer";
 import type { Order } from "@/types/order";
 import type { Product, StockStatus } from "@/types/product";
 import type { StoreSettings } from "@/types/settings";
@@ -71,8 +73,16 @@ export function mapOrder(row: Row): Order {
     customerName: row.customer_name || "",
     phone: row.phone || "",
     address: row.address || "",
+    city: row.city || "",
+    state: row.state || "",
+    pincode: row.pincode || "",
+    landmark: row.landmark || "",
     productIds: splitList(row.product_ids),
     productNames: splitList(row.product_names),
+    quantities: splitList(row.quantities).map((value) => toNumber(value, 1)),
+    subtotal: toNumber(row.subtotal),
+    couponCode: row.coupon_code || "",
+    discount: toNumber(row.discount),
     orderAmount: toNumber(row.order_amount),
     supplierCost: toNumber(row.supplier_cost),
     profit: toNumber(row.profit),
@@ -82,6 +92,34 @@ export function mapOrder(row: Row): Order {
     expectedDelivery: row.expected_delivery || "",
     lastUpdated: row.last_updated || "",
     internalNote: row.internal_note || ""
+  };
+}
+
+export function mapCoupon(row: Row): Coupon {
+  const type = (row.type || "fixed").toLowerCase() as CouponType;
+
+  return {
+    code: (row.code || "").trim().toUpperCase(),
+    description: row.description || "",
+    type: type === "percent" ? "percent" : "fixed",
+    value: toNumber(row.value),
+    minOrderAmount: toNumber(row.min_order_amount),
+    maxDiscount: toNumber(row.max_discount),
+    active: normalizeYesNo(row.active, true),
+    expiresAt: row.expires_at || "",
+    usageNote: row.usage_note || ""
+  };
+}
+
+export function mapOffer(row: Row): OfferBanner {
+  return {
+    offerId: row.offer_id || row.id || "",
+    title: row.title || "GharSet offer",
+    description: row.description || "Useful home organizers at better prices.",
+    badge: row.badge || "",
+    href: row.href || "/shop",
+    active: normalizeYesNo(row.active, true),
+    sortOrder: toNumber(row.sort_order, 999)
   };
 }
 

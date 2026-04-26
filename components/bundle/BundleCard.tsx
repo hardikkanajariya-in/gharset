@@ -1,9 +1,10 @@
 import type { Bundle } from "@/types/bundle";
 import type { Product } from "@/types/product";
-import { bundleOrderMessage, whatsappUrl } from "@/lib/whatsapp";
+import { AddBundleToCartButton } from "@/components/cart/AddBundleToCartButton";
 import { formatPrice } from "@/lib/utils";
 
 export function BundleCard({ bundle, products, whatsappNumber }: { bundle: Bundle; products: Product[]; whatsappNumber: string }) {
+  void whatsappNumber;
   const saving = bundle.mrp && bundle.mrp > bundle.price ? bundle.mrp - bundle.price : 0;
 
   return (
@@ -37,9 +38,7 @@ export function BundleCard({ bundle, products, whatsappNumber }: { bundle: Bundl
           {bundle.mrp ? <span className="text-xs font-bold text-muted line-through">{formatPrice(bundle.mrp)}</span> : null}
           {saving ? <span className="rounded-full bg-accentSoft px-2 py-1 text-xs font-black text-accent">Save {formatPrice(saving)}</span> : null}
         </div>
-        <a href={whatsappUrl(bundleOrderMessage(bundle), whatsappNumber)} target="_blank" rel="noopener noreferrer" className="focus-ring mt-4 inline-flex h-11 w-full items-center justify-center rounded-xl bg-primary px-4 text-sm font-black text-white shadow-crisp transition hover:bg-primaryDark">
-          Order combo on WhatsApp
-        </a>
+        <AddBundleToCartButton products={products} className="mt-4" />
       </div>
     </article>
   );

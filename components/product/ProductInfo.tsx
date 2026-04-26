@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import type { Product } from "@/types/product";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { formatPrice } from "@/lib/utils";
 import { PriceBlock } from "./PriceBlock";
 import { StockBadge } from "./StockBadge";
-import { WhatsAppOrderButton } from "./WhatsAppOrderButton";
 
 export function ProductInfo({ product, whatsappNumber }: { product: Product; whatsappNumber: string }) {
+  void whatsappNumber;
   return (
     <div className="lg:sticky lg:top-24">
       <p className="text-[11px] font-black uppercase tracking-[0.16em] text-secondary">{product.category}</p>
@@ -15,7 +16,10 @@ export function ProductInfo({ product, whatsappNumber }: { product: Product; wha
         <PriceBlock price={product.price} mrp={product.mrp} />
         <StockBadge status={product.stockStatus} />
       </div>
-      <WhatsAppOrderButton product={product} phone={whatsappNumber} className="mt-5 h-12 w-full sm:h-11 sm:w-auto" />
+      <div className="mt-5 grid gap-2 sm:grid-cols-2">
+        <AddToCartButton product={product} className="h-12 w-full sm:h-11" />
+        <AddToCartButton product={product} buyNow className="h-12 w-full border border-primary bg-white text-primary shadow-soft hover:bg-primarySoft sm:h-11" />
+      </div>
 
       <div className="mt-5 rounded-2xl border border-line bg-white p-4 shadow-soft">
         <p className="text-sm font-black text-ink">Key benefits</p>

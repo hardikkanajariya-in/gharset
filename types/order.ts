@@ -15,8 +15,16 @@ export type Order = {
   customerName: string;
   phone: string;
   address?: string;
+  city?: string;
+  state?: string;
+  pincode?: string;
+  landmark?: string;
   productIds: string[];
   productNames: string[];
+  quantities?: number[];
+  subtotal?: number;
+  couponCode?: string;
+  discount?: number;
   orderAmount?: number;
   supplierCost?: number;
   profit?: number;

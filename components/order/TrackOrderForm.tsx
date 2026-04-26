@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { SafeOrder } from "@/types/order";
 import { OrderResultCard } from "./OrderResultCard";
 
 export function TrackOrderForm() {
-  const [orderId, setOrderId] = useState("");
-  const [phoneLast4, setPhoneLast4] = useState("");
+  const searchParams = useSearchParams();
+  const [orderId, setOrderId] = useState(searchParams.get("orderId") || "");
+  const [phoneLast4, setPhoneLast4] = useState(searchParams.get("last4") || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [order, setOrder] = useState<SafeOrder | null>(null);

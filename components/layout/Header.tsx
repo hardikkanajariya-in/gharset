@@ -2,18 +2,35 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BRAND, NAV_ITEMS } from "@/lib/constants";
 import { whatsappUrl, suggestionMessage } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
+import { CART_UPDATED_EVENT, getCartCount, getStoredCart } from "@/lib/cart-storage";
 
 export function Header({ whatsappNumber }: { whatsappNumber: string }) {
   const [open, setOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const pathname = usePathname();
 
   function isActive(href: string) {
     return href === "/" ? pathname === href : pathname.startsWith(href);
   }
+
+  useEffect(() => {
+    function syncCart() {
+      setCartCount(getCartCount(getStoredCart()));
+    }
+
+    syncCart();
+    window.addEventListener(CART_UPDATED_EVENT, syncCart);
+    window.addEventListener("storage", syncCart);
+
+    return () => {
+      window.removeEventListener(CART_UPDATED_EVENT, syncCart);
+      window.removeEventListener("storage", syncCart);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-white/97 backdrop-blur-md">
@@ -46,6 +63,17 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <Link
+            href="/cart"
+            className={cn(
+              "focus-ring rounded-xl border px-4 py-2.5 text-sm font-bold transition",
+              isActive("/cart")
+                ? "border-primary bg-primarySoft text-primary"
+                : "border-lineStrong bg-white text-ink hover:border-secondary hover:text-secondary"
+            )}
+          >
+            Cart {cartCount ? `(${cartCount})` : ""}
+          </Link>
           <a
             href={whatsappUrl(suggestionMessage(), whatsappNumber)}
             target="_blank"
@@ -74,7 +102,8 @@ export function Header({ whatsappNumber }: { whatsappNumber: string }) {
       {open ? (
         <div className="border-t border-line bg-white px-4 py-3 shadow-lift lg:hidden">
           <nav className="grid gap-1 rounded-2xl border border-line bg-background p-2">
-            {NAV_ITEMS.concat([
+              {NAV_ITEMS.concat([
+              { label: `Cart${cartCount ? ` (${cartCount})` : ""}`, href: "/cart" },
               { label: "Free Suggestion", href: "/free-suggestion" },
               { label: "Contact", href: "/contact" }
             ]).map((item) => (
